@@ -24,16 +24,26 @@
     </uninstall>
 
     <administration>
-        <menu link="option=com_weltspiegel">COM_WELTSPIEGEL</menu>
+        <menu>COM_WELTSPIEGEL</menu>
+        <submenu>
+            <menu link="option=com_weltspiegel&amp;view=cinetixx">COM_WELTSPIEGEL_MENU_CINETIXX</menu>
+            <menu link="option=com_weltspiegel&amp;view=vorschauen">COM_WELTSPIEGEL_MENU_VORSCHAUEN</menu>
+            <menu link="option=com_weltspiegel&amp;view=veranstaltungen">COM_WELTSPIEGEL_MENU_VERANSTALTUNGEN</menu>
+        </submenu>
         <files folder="administrator/components/com_weltspiegel">
             <folder>forms</folder>
-            <folder>language</folder>
             <folder>services</folder>
             <folder>sql</folder>
             <folder>src</folder>
             <folder>tmpl</folder>
             <filename>config.xml</filename>
         </files>
+        <languages folder="administrator/components/com_weltspiegel/language">
+            <language tag="de-DE">de-DE/com_weltspiegel.ini</language>
+            <language tag="de-DE">de-DE/com_weltspiegel.sys.ini</language>
+            <language tag="en-GB">en-GB/com_weltspiegel.ini</language>
+            <language tag="en-GB">en-GB/com_weltspiegel.sys.ini</language>
+        </languages>
     </administration>
 
     <files folder="components/com_weltspiegel">
