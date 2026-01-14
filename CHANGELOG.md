@@ -1,3 +1,11 @@
+## v0.8.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.7...v0.8.0)
+
+### 💅 Refactors
+
+- Rename event MVC artefacts to cinetixx due to upcoming new features. ([dba247f](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/dba247f))
+
 ## v0.7.7
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.6...v0.7.7)
