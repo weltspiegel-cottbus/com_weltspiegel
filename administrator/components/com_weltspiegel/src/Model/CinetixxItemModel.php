@@ -14,15 +14,33 @@ use Exception;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\MVC\Model\AdminModel;
+use Joomla\CMS\Table\Table;
 use stdClass;
 
 /**
- * Item Model for an Event.
+ * Item Model for a Cinetixx item.
  *
  * @since  1.0.0
  */
-class EventModel extends AdminModel
+class CinetixxItemModel extends AdminModel
 {
+	/**
+	 * Method to get a table object, load it if necessary.
+	 *
+	 * @param   string  $name     The table name. Optional.
+	 * @param   string  $prefix   The class prefix. Optional.
+	 * @param   array   $options  Configuration array for model. Optional.
+	 *
+	 * @return  Table  A Table object
+	 *
+	 * @since   1.0.0
+	 * @throws  \Exception
+	 */
+	public function getTable($name = 'Cinetixx', $prefix = 'Administrator', $options = array())
+	{
+		return parent::getTable($name, $prefix, $options);
+	}
+
 	/**
 	 * Method to get the row form.
 	 *
@@ -37,8 +55,8 @@ class EventModel extends AdminModel
 	public function getForm($data = [], $loadData = true): false|Form
 	{
 		// Get the form.
-		$form = $this->loadForm('com_weltspiegel.event',
-			'event', ['control' => 'jform', 'load_data' => $loadData]);
+		$form = $this->loadForm('com_weltspiegel.cinetixx',
+			'cinetixx', ['control' => 'jform', 'load_data' => $loadData]);
 
 		if (empty($form))
 		{
@@ -60,7 +78,7 @@ class EventModel extends AdminModel
 	protected function loadFormData(): false|array|stdClass
 	{
 		$app  = Factory::getApplication();
-		$data = $app->getUserState('com_weltspiegel.edit.event.data', []);
+		$data = $app->getUserState('com_weltspiegel.edit.cinetixx.data', []);
 
 		if (empty($data))
 		{

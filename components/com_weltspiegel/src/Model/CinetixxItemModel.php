@@ -19,14 +19,15 @@ use Weltspiegel\Component\Weltspiegel\Administrator\Helper\CinetixxHelper;
 
 
 /**
+ * Model for a single Cinetixx item
  *
  * @since 1.0.0
  */
-class EventModel extends ItemModel
+class CinetixxItemModel extends ItemModel
 {
 
 	/**
-	 * Method to get an event
+	 * Method to get a Cinetixx item
 	 *
 	 * @param $pk int|null
 	 *

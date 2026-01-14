@@ -16,11 +16,11 @@ use Joomla\Database\DatabaseDriver;
 use Weltspiegel\Component\Weltspiegel\Administrator\Helper\YouTubeHelper;
 
 /**
- * Events table class.
+ * Cinetixx table class.
  *
  * @since  1.0.0
  */
-class EventTable extends Table
+class CinetixxTable extends Table
 {
 	/**
 	 * Constructor

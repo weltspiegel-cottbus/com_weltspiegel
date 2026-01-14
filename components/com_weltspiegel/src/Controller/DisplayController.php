@@ -14,11 +14,11 @@ use Joomla\CMS\MVC\Controller\BaseController;
 
 
 /**
- * Events Component Controller
+ * Cinetixx Component Controller
  *
  * @since 1.0.0
  */
 class DisplayController extends BaseController
 {
-	protected $default_view = 'events';
+	protected $default_view = 'cinetixx';
 }

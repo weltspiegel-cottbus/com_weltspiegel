@@ -1,25 +1,21 @@
 <?php
 /**
- * @package     Weltspiegel\Component\Weltspiegel\Site\View\Event
+ * @package     Weltspiegel\Component\Weltspiegel\Site\View\Cinetixx
  *
  * @copyright   Weltspiegel Cottbus
  * @license     MIT; see LICENSE file
  */
 
-namespace Weltspiegel\Component\Weltspiegel\Site\View\Event;
+namespace Weltspiegel\Component\Weltspiegel\Site\View\Cinetixx;
 
 \defined('_JEXEC') or die;
 
 use Exception;
-use Joomla\CMS\Application\CMSApplication;
-use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
-use stdClass;
-use Weltspiegel\Component\Weltspiegel\Site\Model\EventModel;
-
+use Weltspiegel\Component\Weltspiegel\Site\Model\CinetixxModel;
 
 /**
- * View class for a single event
+ * View class for the list of Cinetixx items.
  *
  * @since 1.0.0
  */
@@ -35,12 +31,13 @@ class HtmlView extends BaseHtmlView
 	protected string $title;
 
 	/**
-	 * The single event
+	 * The list of Cinetixx items
 	 *
-	 * @var stdClass
+	 * @var array
+	 *
 	 * @since 1.0.0
 	 */
-	protected stdClass $item;
+	protected array $items;
 
 	/**
 	 * Execute and display a template script.
@@ -52,19 +49,11 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null): void
 	{
-		/** @var CMSApplication $app */
-		$app = Factory::getApplication();
-		$menu = $app->getMenu();
-
-		// Questionable: does this always return the "Programm" top link?
-		$topMenuItem = $menu->getItems('component', 'com_weltspiegel', true);
-		$menu->setActive($topMenuItem->id);
-
-		/** @var EventModel $model */
+		/** @var CinetixxModel $model */
 		$model = $this->getModel();
-		$this->item = $model->getItem();
+		$this->items = $model->getItems();
 
-		$this->title = $this->item->title;
+		$this->title = 'Programmübersicht';
 		$this->setDocumentTitle($this->title);
 
 		parent::display($tpl);

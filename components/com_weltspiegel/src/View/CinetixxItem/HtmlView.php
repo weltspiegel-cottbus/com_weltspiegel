@@ -1,21 +1,25 @@
 <?php
 /**
- * @package     Weltspiegel\Component\Weltspiegel\Site\View\Events
+ * @package     Weltspiegel\Component\Weltspiegel\Site\View\CinetixxItem
  *
  * @copyright   Weltspiegel Cottbus
  * @license     MIT; see LICENSE file
  */
 
-namespace Weltspiegel\Component\Weltspiegel\Site\View\Events;
+namespace Weltspiegel\Component\Weltspiegel\Site\View\CinetixxItem;
 
 \defined('_JEXEC') or die;
 
 use Exception;
+use Joomla\CMS\Application\CMSApplication;
+use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
-use Weltspiegel\Component\Weltspiegel\Site\Model\EventsModel;
+use stdClass;
+use Weltspiegel\Component\Weltspiegel\Site\Model\CinetixxItemModel;
+
 
 /**
- * View class for the list of current events.
+ * View class for a single Cinetixx item
  *
  * @since 1.0.0
  */
@@ -31,13 +35,12 @@ class HtmlView extends BaseHtmlView
 	protected string $title;
 
 	/**
-	 * The list of current events
+	 * The single Cinetixx item
 	 *
-	 * @var array
-	 *
+	 * @var stdClass
 	 * @since 1.0.0
 	 */
-	protected array $items;
+	protected stdClass $item;
 
 	/**
 	 * Execute and display a template script.
@@ -49,11 +52,19 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null): void
 	{
-		/** @var EventsModel $model */
-		$model = $this->getModel();
-		$this->items = $model->getItems();
+		/** @var CMSApplication $app */
+		$app = Factory::getApplication();
+		$menu = $app->getMenu();
 
-		$this->title = 'Programmübersicht';
+		// Questionable: does this always return the "Programm" top link?
+		$topMenuItem = $menu->getItems('component', 'com_weltspiegel', true);
+		$menu->setActive($topMenuItem->id);
+
+		/** @var CinetixxItemModel $model */
+		$model = $this->getModel();
+		$this->item = $model->getItem();
+
+		$this->title = $this->item->title;
 		$this->setDocumentTitle($this->title);
 
 		parent::display($tpl);

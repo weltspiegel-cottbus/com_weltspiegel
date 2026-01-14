@@ -1,12 +1,12 @@
 <?php
 /**
- * @package     Weltspiegel\Component\Weltspiegel\Administrator\View\Events
+ * @package     Weltspiegel\Component\Weltspiegel\Administrator\View\Cinetixx
  *
  * @copyright   Weltspiegel Cottbus
  * @license     MIT; see LICENSE file
  */
 
-namespace Weltspiegel\Component\Weltspiegel\Administrator\View\Events;
+namespace Weltspiegel\Component\Weltspiegel\Administrator\View\Cinetixx;
 
 \defined('_JEXEC') or die;
 
@@ -14,17 +14,17 @@ use Exception;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\Registry\Registry;
-use Weltspiegel\Component\Weltspiegel\Administrator\Model\EventsModel;
+use Weltspiegel\Component\Weltspiegel\Administrator\Model\CinetixxModel;
 
 /**
- * View class for the list of current events.
+ * View class for the list of Cinetixx items.
  *
  * @since  1.0.0
  */
 class HtmlView extends BaseHtmlView
 {
 	/**
-	 * An array of events
+	 * An array of Cinetixx items
 	 *
 	 * @var array
 	 *
@@ -51,7 +51,7 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null): void
 	{
-		/** @var EventsModel $model */
+		/** @var CinetixxModel $model */
 		$model = $this->getModel();
 		$this->items = $model->getItems();
 		$this->state = $model->getState();

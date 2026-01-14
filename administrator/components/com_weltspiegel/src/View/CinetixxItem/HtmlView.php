@@ -1,12 +1,12 @@
 <?php
 /**
- * @package     Weltspiegel\Component\Weltspiegel\Administrator\View\Event
+ * @package     Weltspiegel\Component\Weltspiegel\Administrator\View\CinetixxItem
  *
  * @copyright   Weltspiegel Cottbus
  * @license     MIT; see LICENSE file
  */
 
-namespace Weltspiegel\Component\Weltspiegel\Administrator\View\Event;
+namespace Weltspiegel\Component\Weltspiegel\Administrator\View\CinetixxItem;
 
 \defined('_JEXEC') or die;
 
@@ -18,10 +18,10 @@ use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Toolbar\ToolbarHelper;
 use stdClass;
 use Weltspiegel\Component\Weltspiegel\Administrator\Helper\CinetixxHelper;
-use Weltspiegel\Component\Weltspiegel\Administrator\Model\EventModel;
+use Weltspiegel\Component\Weltspiegel\Administrator\Model\CinetixxItemModel;
 
 /**
- * View to edit a event.
+ * View to edit a Cinetixx item.
  *
  * @since  1.0.0
  */
@@ -36,7 +36,7 @@ class HtmlView extends BaseHtmlView
 	protected Form $form;
 
 	/**
-	 * The event item
+	 * The Cinetixx item
 	 *
 	 * @var stdClass
 	 * @since 1.0.0
@@ -53,7 +53,7 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null): void
 	{
-		/** @var EventModel $model */
+		/** @var CinetixxItemModel $model */
 		$model      = $this->getModel();
 		$this->form = $model->getForm();
 		$this->item = $model->getItem();
@@ -82,8 +82,8 @@ class HtmlView extends BaseHtmlView
 
 		ToolbarHelper::title('Cinetixx Events: Bearbeiten', 'fa fa-film');
 
-		ToolbarHelper::apply('event.apply');
-		ToolbarHelper::save('event.save');
-		ToolbarHelper::cancel('event.cancel', 'JTOOLBAR_CLOSE');
+		ToolbarHelper::apply('cinetixxitem.apply');
+		ToolbarHelper::save('cinetixxitem.save');
+		ToolbarHelper::cancel('cinetixxitem.cancel', 'JTOOLBAR_CLOSE');
 	}
 }

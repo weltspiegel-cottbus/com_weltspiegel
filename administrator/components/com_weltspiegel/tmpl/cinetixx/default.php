@@ -4,7 +4,7 @@
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
-use Weltspiegel\Component\Weltspiegel\Administrator\View\Events\HtmlView;
+use Weltspiegel\Component\Weltspiegel\Administrator\View\Cinetixx\HtmlView;
 
 /** @var HtmlView $this */
 
@@ -12,7 +12,7 @@ $listOrder     = $this->escape($this->state->get('list.ordering'));
 $listDirection = $this->escape($this->state->get('list.direction'));
 
 ?>
-<form action="<?= Route::_('index.php?option=com_weltspiegel&view=events') ?>" method="post" name="adminForm"
+<form action="<?= Route::_('index.php?option=com_weltspiegel&view=cinetixx') ?>" method="post" name="adminForm"
       id="adminForm">
     <div id="j-main-container" class="j-main-container">
         <?= LayoutHelper::render('joomla.searchtools.default', ['view' => $this]) ?>
@@ -33,7 +33,7 @@ $listDirection = $this->escape($this->state->get('list.direction'));
                 <tr>
                     <td><?= $item->cinetixxTitle ?></td>
                     <th scope="row">
-                        <a href="<?= Route::_("index.php?option=com_weltspiegel&task=event.edit&id=" . $item->id . "&event_id=" . $item->event_id) ?>"
+                        <a href="<?= Route::_("index.php?option=com_weltspiegel&task=cinetixxitem.edit&id=" . $item->id . "&event_id=" . $item->event_id) ?>"
                            title="<?= \Joomla\CMS\Language\Text::_('JACTION_EDIT') ?>">
                             <?php if ($item->trailer_id) : ?>
                                 <?= $this->escape($item->trailer_id); ?>

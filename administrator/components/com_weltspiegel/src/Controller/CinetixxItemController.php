@@ -13,12 +13,28 @@ namespace Weltspiegel\Component\Weltspiegel\Administrator\Controller;
 use Joomla\CMS\MVC\Controller\FormController;
 
 /**
- * Controller for a single event
+ * Controller for a single Cinetixx item
  *
  * @since  1.0.0
  */
-class EventController extends FormController
+class CinetixxItemController extends FormController
 {
+	/**
+	 * The prefix to use with controller messages.
+	 *
+	 * @var    string
+	 * @since  1.0.0
+	 */
+	protected $text_prefix = 'COM_WELTSPIEGEL_CINETIXX';
+
+	/**
+	 * The URL view list variable.
+	 *
+	 * @var    string
+	 * @since  1.0.0
+	 */
+	protected $view_list = 'cinetixx';
+
 	/**
 	 *  Method to prepared editing an existing record.
 	 *  Injects the eventId in the user session

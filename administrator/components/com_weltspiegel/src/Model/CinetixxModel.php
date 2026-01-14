@@ -1,12 +1,12 @@
 <?php
 /**
- * @package     Weltspiegel\Component\Weltspiegel\Site\Model
+ * @package     Weltspiegel\Component\Weltspiegel\Administrator\Model
  *
  * @copyright   Weltspiegel Cottbus
  * @license     MIT; see LICENSE file
  */
 
-namespace Weltspiegel\Component\Weltspiegel\Site\Model;
+namespace Weltspiegel\Component\Weltspiegel\Administrator\Model;
 
 \defined('_JEXEC') or die;
 
@@ -18,11 +18,11 @@ use Joomla\Database\QueryInterface;
 use Weltspiegel\Component\Weltspiegel\Administrator\Helper\CinetixxHelper;
 
 /**
- * This models supports retrieving a list of events.
+ * Model class supporting a list of Cinetixx items
  *
  * @since 1.0.0
  */
-class EventsModel extends ListModel
+class CinetixxModel extends ListModel
 {
 	/**
 	 * Cinetixx Mandator ID
@@ -45,6 +45,11 @@ class EventsModel extends ListModel
 	 */
 	public function __construct($config = [], ?MVCFactoryInterface $factory = null)
 	{
+		$config['filter_fields'] = array(
+			'event_id',
+			'title',
+		);
+
 		parent::__construct($config, $factory);
 
 		$params           = ComponentHelper::getParams('com_weltspiegel');
@@ -52,9 +57,9 @@ class EventsModel extends ListModel
 	}
 
 	/**
-	 * Method to get an array of events.
+	 * Method to get an array of Cinetixx items.
 	 *
-	 * @return array|false An array of events on success, false on failure.
+	 * @return array|false An array of Cinetixx items on success, false on failure.
 	 *
 	 * @throws Exception
 	 * @since 1.0.0
@@ -64,25 +69,52 @@ class EventsModel extends ListModel
 		$events = CinetixxHelper::getEvents($this->mandatorId);
 		$items  = parent::getItems();
 
-		if ($items) {
-			foreach ($items as $item) {
-				if(!empty($item->trailer_id)) {
-					$events[$item->event_id]->trailerId = $item->trailer_id;
+		$orderCol = $this->state->get('list.ordering', 'id');
+		$orderDirection = $this->state->get('list.direction', 'desc');
+
+		$events = array_map(function ($event) use (&$items) {
+			$mergedItem = [
+				// Cinetixx event props
+				"cinetixxTitle"     => $event->title,
+				"cinetixxTrailerId" => $event->trailerId,
+				// Database props
+				"id"                => 0,
+				"event_id"          => $event->eventId,
+				"trailer_id"        => null,
+			];
+
+			if ($items)
+			{
+				$itemIx = array_search($event->eventId, array_column($items, 'event_id'));
+
+				if ($itemIx !== false)
+				{
+					$mergedItem["id"]         = $items[$itemIx]->id;
+					$mergedItem["trailer_id"] = $items[$itemIx]->trailer_id;
 				}
 			}
+
+			return (object) $mergedItem;
+
+		}, $events);
+
+		if($orderCol === 'title') {
+			usort($events, function ($a, $b) use ($orderDirection) {
+				return ($a->cinetixxTitle <=> $b->cinetixxTitle) * ($orderDirection === 'ASC' ? 1 : -1);
+			});
 		}
 
 		return $events;
 	}
 
 	/**
-	 * Build an SQL query to load the events.
+	 * Build an SQL query to load the Cinetixx items.
 	 *
 	 * @return QueryInterface
 	 *
-	 * @throws \Exception
+	 * @throws Exception
 	 *
-	 * @since 1.0.0
+	 * @since   1.0
 	 */
 	protected function getListQuery(): QueryInterface
 	{
