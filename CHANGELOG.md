@@ -1,3 +1,12 @@
+## v0.8.1
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.8.0...v0.8.1)
+
+### 🚀 Enhancements
+
+- Update the admin menu for the upcoming features. ([2427dd4](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/2427dd4))
+- Create preview MVC in the admin area. ([9843b9b](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/9843b9b))
+
 ## v0.8.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.7.7...v0.8.0)
