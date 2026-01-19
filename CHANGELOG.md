@@ -1,3 +1,12 @@
+## v0.8.2
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.8.1...v0.8.2)
+
+### 🚀 Enhancements
+
+- Add ACL definitions for deleting vorschau articles. ([b4d2e3e](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/b4d2e3e))
+- Better seperation for custom and freeform vorschauen. ([1133bed](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/1133bed))
+
 ## v0.8.1
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.8.0...v0.8.1)
