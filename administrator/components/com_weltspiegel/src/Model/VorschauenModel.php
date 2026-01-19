@@ -61,10 +61,12 @@ class VorschauenModel extends ListModel
 		$query = $db->getQuery(true);
 
 		// Select from content (articles) table
+		// Only show component-managed articles (with source marker)
 		$query
 			->select('a.id, a.title, a.alias, a.state, a.created, a.modified, a.catid')
 			->from($db->quoteName('#__content', 'a'))
-			->where($db->quoteName('a.catid') . ' = 8'); // Category ID for Vorschau
+			->where($db->quoteName('a.catid') . ' = 8')
+			->where($db->quoteName('a.attribs') . ' LIKE ' . $db->quote('%"source":"com_weltspiegel"%'));
 
 		// Filter by published state
 		$state = $this->getState('filter.state');

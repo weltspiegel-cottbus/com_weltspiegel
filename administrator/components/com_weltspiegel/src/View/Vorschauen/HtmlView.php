@@ -77,6 +77,15 @@ class HtmlView extends BaseHtmlView
 		ToolbarHelper::editList('vorschau.edit');
 		ToolbarHelper::publish('vorschauen.publish', 'JTOOLBAR_PUBLISH', true);
 		ToolbarHelper::unpublish('vorschauen.unpublish', 'JTOOLBAR_UNPUBLISH', true);
-		ToolbarHelper::trash('vorschauen.trash');
+
+		// Show delete when viewing trashed items, otherwise show trash
+		if ($this->state->get('filter.state') == -2)
+		{
+			ToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'vorschauen.delete', 'JTOOLBAR_EMPTY_TRASH');
+		}
+		else
+		{
+			ToolbarHelper::trash('vorschauen.trash');
+		}
 	}
 }

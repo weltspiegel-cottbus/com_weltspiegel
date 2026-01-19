@@ -131,13 +131,17 @@ class VorschauModel extends AdminModel
 	 */
 	public function save($data)
 	{
+		$isNew = empty($data['id']);
+
 		// Ensure the article is in the correct category
 		$data['catid'] = 8; // Vorschau category
 
-		// Set article type
-		if (empty($data['id']))
+		// Set defaults for new articles
+		if ($isNew)
 		{
 			$data['created_by'] = Factory::getApplication()->getIdentity()->id;
+			// Use 'now' with UTC timezone to avoid timezone issues
+			$data['publish_up'] = Factory::getDate('now', 'UTC')->toSql();
 		}
 
 		// Default state to published
@@ -151,6 +155,12 @@ class VorschauModel extends AdminModel
 		{
 			$data['language'] = '*';
 		}
+
+		// Mark as component-managed article
+		if (!isset($data['attribs']) || !is_array($data['attribs'])) {
+			$data['attribs'] = [];
+		}
+		$data['attribs']['source'] = 'com_weltspiegel';
 
 		// Parse and validate YouTube URL/ID
 		if (!empty($data['attribs']['youtube_url']))
@@ -177,7 +187,142 @@ class VorschauModel extends AdminModel
 			$data['attribs']['youtube_url'] = $videoId;
 		}
 
-		return parent::save($data);
+		// Save the article
+		$result = parent::save($data);
+
+		// Create workflow association for new articles (required for Joomla 4/5)
+		if ($result && $isNew)
+		{
+			$articleId = $this->getState($this->getName() . '.id');
+			$this->createWorkflowAssociation($articleId);
+		}
+
+		// Clean content cache so new/updated articles appear immediately
+		if ($result)
+		{
+			$this->cleanCache('com_content');
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Method to change the published state of articles.
+	 *
+	 * @param   array    $pks    A list of the primary keys to change.
+	 * @param   integer  $value  The value of the published state.
+	 *
+	 * @return  boolean  True on success.
+	 *
+	 * @since   1.0.0
+	 */
+	public function publish(&$pks, $value = 1)
+	{
+		$table = $this->getTable();
+		$pks = (array) $pks;
+
+		foreach ($pks as $pk)
+		{
+			if (!$table->load($pk))
+			{
+				$this->setError($table->getError());
+				return false;
+			}
+
+			$table->state = $value;
+
+			if (!$table->store())
+			{
+				$this->setError($table->getError());
+				return false;
+			}
+		}
+
+		// Clean content cache
+		$this->cleanCache('com_content');
+
+		return true;
+	}
+
+	/**
+	 * Method to delete articles.
+	 *
+	 * @param   array  $pks  A list of the primary keys to delete.
+	 *
+	 * @return  boolean  True on success.
+	 *
+	 * @since   1.0.0
+	 */
+	public function delete(&$pks)
+	{
+		$table = $this->getTable();
+		$pks = (array) $pks;
+		$db = $this->getDatabase();
+
+		foreach ($pks as $pk)
+		{
+			if (!$table->load($pk))
+			{
+				$this->setError($table->getError());
+				return false;
+			}
+
+			if (!$table->delete($pk))
+			{
+				$this->setError($table->getError());
+				return false;
+			}
+
+			// Also delete workflow association
+			$query = $db->getQuery(true)
+				->delete($db->quoteName('#__workflow_associations'))
+				->where($db->quoteName('item_id') . ' = ' . (int) $pk)
+				->where($db->quoteName('extension') . ' = ' . $db->quote('com_content.article'));
+			$db->setQuery($query);
+			$db->execute();
+		}
+
+		// Clean content cache
+		$this->cleanCache('com_content');
+
+		return true;
+	}
+
+	/**
+	 * Create workflow association for an article.
+	 * Required for articles to appear in Joomla's Content manager.
+	 *
+	 * @param   int  $articleId  The article ID
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0.0
+	 */
+	protected function createWorkflowAssociation(int $articleId): void
+	{
+		$db = $this->getDatabase();
+
+		// Check if association already exists
+		$query = $db->getQuery(true)
+			->select('COUNT(*)')
+			->from($db->quoteName('#__workflow_associations'))
+			->where($db->quoteName('item_id') . ' = ' . $articleId)
+			->where($db->quoteName('extension') . ' = ' . $db->quote('com_content.article'));
+
+		$db->setQuery($query);
+		if ($db->loadResult() > 0)
+		{
+			return;
+		}
+
+		// Insert workflow association (stage_id 1 = published)
+		$query = $db->getQuery(true)
+			->insert($db->quoteName('#__workflow_associations'))
+			->columns([$db->quoteName('item_id'), $db->quoteName('stage_id'), $db->quoteName('extension')])
+			->values($articleId . ', 1, ' . $db->quote('com_content.article'));
+
+		$db->setQuery($query);
+		$db->execute();
 	}
 
 	/**
