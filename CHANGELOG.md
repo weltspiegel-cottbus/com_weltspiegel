@@ -1,3 +1,11 @@
+## v0.8.4
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.8.3...v0.8.4)
+
+### 🚀 Enhancements
+
+- Add empty state view for vorschauen. ([b4b0909](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/b4b0909))
+
 ## v0.8.3
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.8.2...v0.8.3)
