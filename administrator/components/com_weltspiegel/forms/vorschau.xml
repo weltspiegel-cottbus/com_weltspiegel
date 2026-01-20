@@ -16,19 +16,10 @@
     />
 
     <field
-            name="introtext"
+            name="articletext"
             type="editor"
-            label="Kurzbeschreibung"
-            description="Kurze Beschreibung für die Vorschau"
-            filter="safehtml"
-            buttons="true"
-    />
-
-    <field
-            name="fulltext"
-            type="editor"
-            label="Vollständiger Text"
-            description="Ausführliche Beschreibung der Vorschau"
+            label="Text"
+            description="Beschreibung der Vorschau"
             filter="safehtml"
             buttons="true"
     />

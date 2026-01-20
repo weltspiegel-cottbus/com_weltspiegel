@@ -20,8 +20,7 @@ $wa->useScript('form.validate');
             <div class="card">
                 <div class="card-body">
                     <?php echo $this->form->renderField('title'); ?>
-                    <?php echo $this->form->renderField('introtext'); ?>
-                    <?php echo $this->form->renderField('fulltext'); ?>
+                    <?php echo $this->form->renderField('articletext'); ?>
                 </div>
             </div>
         </div>

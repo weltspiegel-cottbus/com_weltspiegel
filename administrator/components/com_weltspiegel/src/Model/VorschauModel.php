@@ -106,6 +106,17 @@ class VorschauModel extends AdminModel
 					$item->images = '';
 				}
 			}
+
+			// Combine introtext and fulltext into articletext for editor
+			// (Content table will split it back on save)
+			if (!empty($item->fulltext) && trim($item->fulltext) !== '')
+			{
+				$item->articletext = $item->introtext . '<hr id="system-readmore">' . $item->fulltext;
+			}
+			else
+			{
+				$item->articletext = $item->introtext ?? '';
+			}
 		}
 
 		return $item;
