@@ -17,7 +17,7 @@ use Joomla\CMS\MVC\Controller\FormController;
  *
  * @since  1.0.0
  */
-class CinetixxItemController extends FormController
+class CinetixxitemController extends FormController
 {
 	/**
 	 * The prefix to use with controller messages.

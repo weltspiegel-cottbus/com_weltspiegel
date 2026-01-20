@@ -32,7 +32,7 @@ class CinetixxController extends AdminController
 	 *
 	 * @since   1.0.0
 	 */
-	public function getModel($name = 'CinetixxItem', $prefix = 'Administrator', $config = ['ignore_request' => true]): BaseDatabaseModel
+	public function getModel($name = 'Cinetixxitem', $prefix = 'Administrator', $config = ['ignore_request' => true]): BaseDatabaseModel
 	{
 		return parent::getModel($name, $prefix, $config);
 	}

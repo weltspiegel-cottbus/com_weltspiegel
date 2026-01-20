@@ -1,12 +1,12 @@
 <?php
 /**
- * @package     Weltspiegel\Component\Weltspiegel\Site\View\CinetixxItem
+ * @package     Weltspiegel\Component\Weltspiegel\Site\View\Cinetixxitem
  *
  * @copyright   Weltspiegel Cottbus
  * @license     MIT; see LICENSE file
  */
 
-namespace Weltspiegel\Component\Weltspiegel\Site\View\CinetixxItem;
+namespace Weltspiegel\Component\Weltspiegel\Site\View\Cinetixxitem;
 
 \defined('_JEXEC') or die;
 
@@ -15,7 +15,7 @@ use Joomla\CMS\Application\CMSApplication;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use stdClass;
-use Weltspiegel\Component\Weltspiegel\Site\Model\CinetixxItemModel;
+use Weltspiegel\Component\Weltspiegel\Site\Model\CinetixxitemModel;
 
 
 /**
@@ -60,7 +60,7 @@ class HtmlView extends BaseHtmlView
 		$topMenuItem = $menu->getItems('component', 'com_weltspiegel', true);
 		$menu->setActive($topMenuItem->id);
 
-		/** @var CinetixxItemModel $model */
+		/** @var CinetixxitemModel $model */
 		$model = $this->getModel();
 		$this->item = $model->getItem();
 

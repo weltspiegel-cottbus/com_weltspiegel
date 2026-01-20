@@ -22,7 +22,7 @@ use stdClass;
  *
  * @since  1.0.0
  */
-class CinetixxItemModel extends AdminModel
+class CinetixxitemModel extends AdminModel
 {
 	/**
 	 * Method to get a table object, load it if necessary.

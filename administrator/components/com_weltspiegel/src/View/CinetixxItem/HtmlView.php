@@ -1,12 +1,12 @@
 <?php
 /**
- * @package     Weltspiegel\Component\Weltspiegel\Administrator\View\CinetixxItem
+ * @package     Weltspiegel\Component\Weltspiegel\Administrator\View\Cinetixxitem
  *
  * @copyright   Weltspiegel Cottbus
  * @license     MIT; see LICENSE file
  */
 
-namespace Weltspiegel\Component\Weltspiegel\Administrator\View\CinetixxItem;
+namespace Weltspiegel\Component\Weltspiegel\Administrator\View\Cinetixxitem;
 
 \defined('_JEXEC') or die;
 
@@ -18,7 +18,7 @@ use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Toolbar\ToolbarHelper;
 use stdClass;
 use Weltspiegel\Component\Weltspiegel\Administrator\Helper\CinetixxHelper;
-use Weltspiegel\Component\Weltspiegel\Administrator\Model\CinetixxItemModel;
+use Weltspiegel\Component\Weltspiegel\Administrator\Model\CinetixxitemModel;
 
 /**
  * View to edit a Cinetixx item.
@@ -53,7 +53,7 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null): void
 	{
-		/** @var CinetixxItemModel $model */
+		/** @var CinetixxitemModel $model */
 		$model      = $this->getModel();
 		$this->form = $model->getForm();
 		$this->item = $model->getItem();

@@ -23,7 +23,7 @@ use Weltspiegel\Component\Weltspiegel\Administrator\Helper\CinetixxHelper;
  *
  * @since 1.0.0
  */
-class CinetixxItemModel extends ItemModel
+class CinetixxitemModel extends ItemModel
 {
 
 	/**
