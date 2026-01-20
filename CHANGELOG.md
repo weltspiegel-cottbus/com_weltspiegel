@@ -1,3 +1,15 @@
+## v0.9.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.8.4...v0.9.0)
+
+### 🚀 Enhancements
+
+- Add the feature for Veranstaltungen ([0682ecc](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/0682ecc))
+
+### 🩹 Fixes
+
+- Display empty view if there are exactly no vorschauen (custom) ([b38e830](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/b38e830))
+
 ## v0.8.4
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.8.3...v0.8.4)
