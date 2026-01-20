@@ -1,3 +1,16 @@
+## v0.8.3
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.8.2...v0.8.3)
+
+### 🚀 Enhancements
+
+- Simplify custom vorschau edititing. ([f3934a8](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/f3934a8))
+
+### 🩹 Fixes
+
+- Update creation date. ([cc15055](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/cc15055))
+- Image was not correct saved as article intro image. ([cabe674](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/cabe674))
+
 ## v0.8.2
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.8.1...v0.8.2)

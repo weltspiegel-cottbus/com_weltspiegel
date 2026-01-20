@@ -2,7 +2,7 @@
 <extension type="component" method="upgrade">
 
     <name>Weltspiegel</name>
-    <version>0.8.2</version>
+    <version>0.8.3</version>
     <creationDate>25.11.2025</creationDate>
     <author>Michael Buchholz</author>
     <authorEmail>mail@lean-stack.rocks</authorEmail>
