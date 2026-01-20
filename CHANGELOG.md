@@ -1,3 +1,11 @@
+## v0.9.1
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.9.0...v0.9.1)
+
+### 🩹 Fixes
+
+- Casing issues. Mac is fine, Linux not. ([0273781](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/0273781))
+
 ## v0.9.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.8.4...v0.9.0)
