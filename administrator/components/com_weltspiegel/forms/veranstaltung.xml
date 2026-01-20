@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <field
+            name="id"
+            type="hidden"
+    />
+
+    <field
+            name="title"
+            type="text"
+            label="Titel"
+            description="Titel der Veranstaltung"
+            required="true"
+            class="form-control"
+            size="40"
+    />
+
+    <field
+            name="articletext"
+            type="editor"
+            label="Text"
+            description="Beschreibung der Veranstaltung"
+            filter="safehtml"
+            buttons="true"
+    />
+
+    <field
+            name="images"
+            type="media"
+            label="Banner/Poster"
+            description="Wählen Sie ein Bild für die Veranstaltung"
+            directory="images/veranstaltungen"
+    />
+
+    <field
+            name="state"
+            type="list"
+            label="Status"
+            description="Veröffentlichungsstatus"
+            default="1"
+            class="form-select"
+    >
+        <option value="1">Veröffentlicht</option>
+        <option value="0">Nicht veröffentlicht</option>
+        <option value="2">Archiviert</option>
+        <option value="-2">Papierkorb</option>
+    </field>
+
+    <field
+            name="catid"
+            type="hidden"
+            default="9"
+    />
+
+    <fields name="attribs" label="Erweiterte Optionen">
+        <fieldset name="advanced" label="Erweiterte Optionen">
+            <field
+                    name="youtube_url"
+                    type="text"
+                    label="YouTube Video"
+                    description="Gib eine YouTube URL (https://www.youtube.com/watch?v=...) oder nur die Video ID ein"
+                    hint="z.B. dQw4w9WgXcQ oder vollständige URL"
+                    class="form-control"
+                    size="40"
+            />
+        </fieldset>
+    </fields>
+</form>
