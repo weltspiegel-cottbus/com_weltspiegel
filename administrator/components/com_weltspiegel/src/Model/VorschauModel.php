@@ -92,6 +92,20 @@ class VorschauModel extends AdminModel
 					$item->attribs = $attribs;
 				}
 			}
+
+			// Extract image_intro from images JSON for media field
+			if (!empty($item->images))
+			{
+				$images = json_decode($item->images, true);
+				if (is_array($images) && !empty($images['image_intro']))
+				{
+					$item->images = $images['image_intro'];
+				}
+				else
+				{
+					$item->images = '';
+				}
+			}
 		}
 
 		return $item;
@@ -161,6 +175,43 @@ class VorschauModel extends AdminModel
 			$data['attribs'] = [];
 		}
 		$data['attribs']['source'] = 'com_weltspiegel';
+
+		// Convert single media field to Joomla's images JSON structure
+		if (!empty($data['images']) && is_string($data['images']))
+		{
+			// Extract clean image path (remove Joomla media field metadata after #)
+			$imagePath = $data['images'];
+			if (str_contains($imagePath, '#'))
+			{
+				$imagePath = explode('#', $imagePath)[0];
+			}
+
+			// Create proper images JSON structure (image_intro for list, image_fulltext for single view)
+			$data['images'] = json_encode([
+				'image_intro' => $imagePath,
+				'image_intro_alt' => '',
+				'image_intro_caption' => '',
+				'float_intro' => '',
+				'image_fulltext' => $imagePath,
+				'image_fulltext_alt' => '',
+				'image_fulltext_caption' => '',
+				'float_fulltext' => ''
+			]);
+		}
+		elseif (empty($data['images']))
+		{
+			// Ensure empty images is proper JSON
+			$data['images'] = json_encode([
+				'image_intro' => '',
+				'image_intro_alt' => '',
+				'image_intro_caption' => '',
+				'float_intro' => '',
+				'image_fulltext' => '',
+				'image_fulltext_alt' => '',
+				'image_fulltext_caption' => '',
+				'float_fulltext' => ''
+			]);
+		}
 
 		// Parse and validate YouTube URL/ID
 		if (!empty($data['attribs']['youtube_url']))
