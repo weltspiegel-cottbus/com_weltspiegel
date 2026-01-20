@@ -58,6 +58,12 @@ class HtmlView extends BaseHtmlView
 		$this->filterForm    = $model->getFilterForm();
 		$this->activeFilters = $model->getActiveFilters();
 
+		// Check for empty state (no items at all, regardless of filters)
+		if (!\count($this->items) && $model->getIsEmptyState())
+		{
+			$this->setLayout('emptystate');
+		}
+
 		if ($this->getLayout() !== 'modal') {
 			$this->addToolbar();
 		}
