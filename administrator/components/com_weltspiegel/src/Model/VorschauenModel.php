@@ -92,6 +92,28 @@ class VorschauenModel extends ListModel
 	}
 
 	/**
+	 * Provide a query to be used to evaluate if this is an Empty State.
+	 * Override to check only for Vorschau articles, not all content.
+	 *
+	 * @return QueryInterface
+	 *
+	 * @since 1.0.0
+	 */
+	protected function getEmptyStateQuery(): QueryInterface
+	{
+		$db = $this->getDatabase();
+		$query = $db->getQuery(true);
+
+		$query
+			->select('COUNT(*)')
+			->from($db->quoteName('#__content', 'a'))
+			->where($db->quoteName('a.catid') . ' = 8')
+			->where($db->quoteName('a.attribs') . ' LIKE ' . $db->quote('%"source":"com_weltspiegel"%'));
+
+		return $query;
+	}
+
+	/**
 	 * Method to auto-populate the model state.
 	 *
 	 * @param   string  $ordering   An optional ordering field.
