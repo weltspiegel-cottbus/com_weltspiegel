@@ -1,3 +1,11 @@
+## v0.9.2
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.9.1...v0.9.2)
+
+### 🩹 Fixes
+
+- Force Git to track CinetixxItem → Cinetixxitem case change ([9aa368d](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/9aa368d))
+
 ## v0.9.1
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.9.0...v0.9.1)
