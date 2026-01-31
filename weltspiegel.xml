@@ -22,6 +22,11 @@
             <file driver="mysql" charset="utf8">sql/weltspiegel.uninstall.sql</file>
         </sql>
     </uninstall>
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates</schemapath>
+        </schemas>
+    </update>
 
     <administration>
         <menu>COM_WELTSPIEGEL</menu>
