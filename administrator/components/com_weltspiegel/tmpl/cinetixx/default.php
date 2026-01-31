@@ -34,18 +34,20 @@ $listDirection = $this->escape($this->state->get('list.direction'));
             <tbody>
             <?php foreach ($this->items as $i => $item) : ?>
                 <tr>
-                    <td><?= $item->cinetixxTitle ?></td>
                     <th scope="row">
                         <a href="<?= Route::_("index.php?option=com_weltspiegel&task=cinetixxitem.edit&id=" . $item->id . "&event_id=" . $item->event_id) ?>"
                            title="<?= \Joomla\CMS\Language\Text::_('JACTION_EDIT') ?>">
-                            <?php if ($item->trailer_id) : ?>
-                                <?= $this->escape($item->trailer_id); ?>
-                            <?php elseif ($item->cinetixxTrailerId) : ?>
-                                <?= $this->escape($item->cinetixxTrailerId) . ' (Cinetixx)'; ?>
-                            <?php else : ?>
-                                Noch kein Trailer gesetzt
-                            <?php endif; ?>
+                            <?= $item->cinetixxTitle ?>
                         </a>
+                    </th>
+                    <td>
+                        <?php if ($item->trailer_id) : ?>
+                            <span class="badge text-bg-success"><?= $this->escape($item->trailer_id) ?></span>
+                        <?php elseif ($item->cinetixxTrailerId) : ?>
+                            <span class="text-secondary"><?= $this->escape($item->cinetixxTrailerId) ?> (Cinetixx)</span>
+                        <?php else : ?>
+                            <span class="badge text-bg-warning">— (kein Trailer)</span>
+                        <?php endif; ?>
                         <?php if ($item->trailer_id) : ?>
                             <div class="small text-secondary-emphasis">
                                 <span>Link zum Trailer:
@@ -70,7 +72,7 @@ $listDirection = $this->escape($this->state->get('list.direction'));
                                 <?php endif; ?>
                             </div>
                         <?php elseif ($item->cinetixxTrailerId) : ?>
-                        <div class="small text-secondary-emphasis">
+                            <div class="small text-secondary-emphasis">
                             <span>Cinetixx-Trailer:
                                 <a href="https://youtu.be/<?= $item->cinetixxTrailerId ?>"
                                    title="Öffnet neuen Tab mit dem YouTube-Video"
@@ -79,9 +81,9 @@ $listDirection = $this->escape($this->state->get('list.direction'));
                                     youtu.be/<?= $item->cinetixxTrailerId ?>
                                 </a>
                             </span>
-                        </div>
+                            </div>
                         <?php endif; ?>
-                    </th>
+                    </td>
                     <td>
                         <?php if ($item->poster || $item->poster_big) : ?>
                             <?php if ($item->poster) : ?>
