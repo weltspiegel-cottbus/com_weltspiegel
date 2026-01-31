@@ -1,3 +1,11 @@
+## v0.9.4
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.9.3...v0.9.4)
+
+### 🩹 Fixes
+
+- Add update section. ([9d4d3a9](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/9d4d3a9))
+
 ## v0.9.3
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.9.2...v0.9.3)
