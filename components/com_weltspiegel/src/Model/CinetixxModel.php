@@ -69,6 +69,12 @@ class CinetixxModel extends ListModel
 				if(!empty($item->trailer_id)) {
 					$events[$item->event_id]->trailerId = $item->trailer_id;
 				}
+				if(!empty($item->poster)) {
+					$events[$item->event_id]->poster = $item->poster;
+				}
+				if(!empty($item->poster_big)) {
+					$events[$item->event_id]->posterBig = $item->poster_big;
+				}
 			}
 		}
 
@@ -92,7 +98,7 @@ class CinetixxModel extends ListModel
 		$query = $db->createQuery();
 
 		$query
-			->select('id, event_id, trailer_id')
+			->select('id, event_id, trailer_id, poster, poster_big')
 			->from('#__ws_cinetixx_events')
 			->whereIn('event_id', $eventIds);
 

@@ -9,4 +9,14 @@
             type="text"
             label="YouTube Link oder Video ID"
     />
+    <field
+            name="poster"
+            type="url"
+            label="Poster URL"
+    />
+    <field
+            name="poster_big"
+            type="url"
+            label="Poster URL (Groß)"
+    />
 </form>

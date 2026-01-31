@@ -56,9 +56,20 @@ class CinetixxitemModel extends ItemModel
 		$db->setQuery($query);
 
 		$item = $db->loadObject();
-		if (!empty($item) && !empty($item->trailer_id))
+		if (!empty($item))
 		{
-			$event->trailerId = $item->trailer_id;
+			if (!empty($item->trailer_id))
+			{
+				$event->trailerId = $item->trailer_id;
+			}
+			if (!empty($item->poster))
+			{
+				$event->poster = $item->poster;
+			}
+			if (!empty($item->poster_big))
+			{
+				$event->posterBig = $item->poster_big;
+			}
 		}
 
 		return $event;

@@ -26,6 +26,9 @@ $listDirection = $this->escape($this->state->get('list.direction'));
                 <th>
                     Trailer (YouTube ID)
                 </th>
+                <th>
+                    Poster
+                </th>
             </tr>
             </thead>
             <tbody>
@@ -79,6 +82,18 @@ $listDirection = $this->escape($this->state->get('list.direction'));
                         </div>
                         <?php endif; ?>
                     </th>
+                    <td>
+                        <?php if ($item->poster || $item->poster_big) : ?>
+                            <?php if ($item->poster) : ?>
+                                <span class="badge text-bg-success">Poster</span>
+                            <?php endif; ?>
+                            <?php if ($item->poster_big) : ?>
+                                <span class="badge text-bg-success">Groß</span>
+                            <?php endif; ?>
+                        <?php else : ?>
+                            <span class="text-secondary">Cinetixx</span>
+                        <?php endif; ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

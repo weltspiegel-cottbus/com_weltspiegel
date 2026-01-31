@@ -77,10 +77,14 @@ class CinetixxModel extends ListModel
 				// Cinetixx event props
 				"cinetixxTitle"     => $event->title,
 				"cinetixxTrailerId" => $event->trailerId,
+				"cinetixxPoster"    => $event->poster,
+				"cinetixxPosterBig" => $event->posterBig,
 				// Database props
 				"id"                => 0,
 				"event_id"          => $event->eventId,
 				"trailer_id"        => null,
+				"poster"            => null,
+				"poster_big"        => null,
 			];
 
 			if ($items)
@@ -91,6 +95,8 @@ class CinetixxModel extends ListModel
 				{
 					$mergedItem["id"]         = $items[$itemIx]->id;
 					$mergedItem["trailer_id"] = $items[$itemIx]->trailer_id;
+					$mergedItem["poster"]     = $items[$itemIx]->poster;
+					$mergedItem["poster_big"] = $items[$itemIx]->poster_big;
 				}
 			}
 
@@ -124,7 +130,7 @@ class CinetixxModel extends ListModel
 		$query = $db->createQuery();
 
 		$query
-			->select('id, event_id, trailer_id')
+			->select('id, event_id, trailer_id, poster, poster_big')
 			->from('#__ws_cinetixx_events')
 			->whereIn('event_id', $eventIds);
 
