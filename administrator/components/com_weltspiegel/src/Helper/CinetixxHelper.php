@@ -111,6 +111,16 @@ abstract class CinetixxHelper
 				$event->trailerUrl = trim($show->EVENT_TRAILER) ?: false;
 				$event->trailerId  = YouTubeHelper::parseYoutubeId($event->trailerUrl);
 
+				$event->hall         = (string) $show->SAAL;
+				$event->startDay     = (string) $show->STARTDAY;
+				$event->year         = (string) $show->YEAR;
+				$event->country      = (string) $show->COUNTRY;
+				$event->actor        = (string) $show->ACTOR;
+				$event->director     = (string) $show->DIRECTOR;
+				$event->screenwriter = (string) $show->SCREENWRITER;
+				$event->music        = (string) $show->MUSIC;
+				$event->camera       = (string) $show->CAMERA;
+
 				$events[$eventId] = $event;
 			}
 
