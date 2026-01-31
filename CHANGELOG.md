@@ -1,3 +1,17 @@
+## v0.9.3
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.9.2...v0.9.3)
+
+### 🚀 Enhancements
+
+- Add missing event fields. ([34f5461](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/34f5461))
+- Verify images data from API. ([b64f8ad](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/b64f8ad))
+
+### 🏡 Chore
+
+- Add docs folder to document the current API call. ([6753452](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/6753452))
+- Exclude docs from release. ([ba61923](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/ba61923))
+
 ## v0.9.2
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.9.1...v0.9.2)
