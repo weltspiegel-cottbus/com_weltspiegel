@@ -1,3 +1,15 @@
+## v0.10.1
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.10.0...v0.10.1)
+
+### 🩹 Fixes
+
+- Cleaned up cinetixx list view. ([66b8902](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/66b8902))
+
+### 💅 Refactors
+
+- Use media fields for the posters. ([deadc7a](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/deadc7a))
+
 ## v0.10.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.9.4...v0.10.0)
