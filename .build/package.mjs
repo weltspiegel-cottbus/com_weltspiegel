@@ -29,6 +29,7 @@ const excludePatterns = [
     '.build',
     '.changelogrc',
     '.env',
+    'docs',
     'node_modules',
     'package.json',
     'package-lock.json',
