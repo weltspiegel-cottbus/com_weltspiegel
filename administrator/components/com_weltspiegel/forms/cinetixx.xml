@@ -11,12 +11,12 @@
     />
     <field
             name="poster"
-            type="url"
-            label="Poster URL"
+            type="media"
+            label="Poster"
     />
     <field
             name="poster_big"
-            type="url"
-            label="Poster URL (Groß)"
+            type="media"
+            label="Poster (Groß)"
     />
 </form>

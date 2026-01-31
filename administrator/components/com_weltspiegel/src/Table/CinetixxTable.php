@@ -58,14 +58,7 @@ class CinetixxTable extends Table
 		}
 
 		$this->poster = trim($this->poster ?? '');
-		if ($this->poster !== '' && !filter_var($this->poster, FILTER_VALIDATE_URL)) {
-			throw new Exception('Ungültige Poster URL.');
-		}
-
 		$this->poster_big = trim($this->poster_big ?? '');
-		if ($this->poster_big !== '' && !filter_var($this->poster_big, FILTER_VALIDATE_URL)) {
-			throw new Exception('Ungültige Poster URL (Groß).');
-		}
 
 		return true;
 	}
