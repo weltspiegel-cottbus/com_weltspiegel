@@ -102,11 +102,16 @@ abstract class CinetixxHelper
 				$event->language      = (string) $show->LANGUAGE;
 				$event->is3D          = (string) $show->FLAG_3D === 'true';
 
-				$event->poster    = (string) $show->ARTWORK;
-				$event->posterBig = (string) $show->ARTWORK_BIG;
-				$event->images[]   = (string) $show->IMAGE_1;
-				$event->images[]   = (string) $show->IMAGE_2;
-				$event->images[]   = (string) $show->IMAGE_3;
+				$poster    = trim($show->ARTWORK) ?: null;
+				$posterBig = trim($show->ARTWORK_BIG) ?: null;
+				$event->poster    = $poster ?? $posterBig;
+				$event->posterBig = $posterBig ?? $poster;
+
+				$event->images = array_filter([
+					(string) $show->IMAGE_1,
+					(string) $show->IMAGE_2,
+					(string) $show->IMAGE_3,
+				], fn($img) => trim($img) !== '');
 
 				$event->trailerUrl = trim($show->EVENT_TRAILER) ?: false;
 				$event->trailerId  = YouTubeHelper::parseYoutubeId($event->trailerUrl);
