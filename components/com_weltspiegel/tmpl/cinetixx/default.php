@@ -82,7 +82,7 @@ $futureHeadingShown = false;
 			    }
 			}
 
-			$detailRoute = Route::_('index.php?view=event&event_id=' . $id);
+			$detailRoute = Route::_('index.php?option=com_weltspiegel&view=cinetixxitem&event_id=' . $id);
 			?>
         <div class="border border-dark p-2">
             <div class="d-flex d-sm-block gap-3 flex-column clearfix">
