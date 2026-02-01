@@ -1,3 +1,15 @@
+## v1.0.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.10.2...v1.0.0)
+
+### 🚀 Enhancements
+
+- Implement SEF URLs. Resolves #1 ([#1](https://github.com/weltspiegel-cottbus/com_weltspiegel/issues/1))
+
+### 🩹 Fixes
+
+- Drop unneeded media support in component. Resolves #15 and resolves #22 ([#15](https://github.com/weltspiegel-cottbus/com_weltspiegel/issues/15), [#22](https://github.com/weltspiegel-cottbus/com_weltspiegel/issues/22))
+
 ## v0.10.2
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.10.1...v0.10.2)
