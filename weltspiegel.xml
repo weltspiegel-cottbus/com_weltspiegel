@@ -59,10 +59,6 @@
         <folder>layouts</folder>
     </files>
 
-    <media folder="media/com_weltspiegel" destination="com_weltspiegel">
-        <filename>joomla.asset.json</filename>
-    </media>
-
     <updateservers>
         <server type="extension" priority="1" name="Weltspiegel Component Updates">https://raw.githubusercontent.com/weltspiegel-cottbus/com_weltspiegel/main/update-manifest.xml</server>
     </updateservers>
