@@ -1,3 +1,15 @@
+## v0.10.2
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.10.1...v0.10.2)
+
+### 🚀 Enhancements
+
+- Add tagline fields, gaining more layout control now. ([b12f613](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/b12f613))
+
+### 🩹 Fixes
+
+- Add missing language strings. Resolves #20 ([#20](https://github.com/weltspiegel-cottbus/com_weltspiegel/issues/20))
+
 ## v0.10.1
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.10.0...v0.10.1)
