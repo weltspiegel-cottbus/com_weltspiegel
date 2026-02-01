@@ -55,6 +55,15 @@
     <fields name="attribs" label="Erweiterte Optionen">
         <fieldset name="advanced" label="Erweiterte Optionen">
             <field
+                    name="tagline"
+                    type="text"
+                    label="Tagline"
+                    description="Kurze Zusatzinfo, z.B. Datum der Veranstaltung: 'Am 15. März 2026'"
+                    class="form-control"
+                    size="60"
+            />
+
+            <field
                     name="youtube_url"
                     type="text"
                     label="YouTube Video"
