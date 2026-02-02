@@ -61,12 +61,11 @@ class VeranstaltungenModel extends ListModel
 		$query = $db->getQuery(true);
 
 		// Select from content (articles) table
-		// Only show component-managed articles (with source marker)
+		// Show all articles in category 9 (Veranstaltungen)
 		$query
 			->select('a.id, a.title, a.alias, a.state, a.created, a.modified, a.catid')
 			->from($db->quoteName('#__content', 'a'))
-			->where($db->quoteName('a.catid') . ' = 9')
-			->where($db->quoteName('a.attribs') . ' LIKE ' . $db->quote('%"source":"com_weltspiegel"%'));
+			->where($db->quoteName('a.catid') . ' = 9');
 
 		// Filter by published state
 		$state = $this->getState('filter.state');
@@ -107,8 +106,7 @@ class VeranstaltungenModel extends ListModel
 		$query
 			->select('COUNT(*)')
 			->from($db->quoteName('#__content', 'a'))
-			->where($db->quoteName('a.catid') . ' = 9')
-			->where($db->quoteName('a.attribs') . ' LIKE ' . $db->quote('%"source":"com_weltspiegel"%'));
+			->where($db->quoteName('a.catid') . ' = 9');
 
 		return $query;
 	}
