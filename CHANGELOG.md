@@ -1,3 +1,15 @@
+## v1.1.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v1.0.0...v1.1.0)
+
+### 🚀 Enhancements
+
+- No filtering on component managed articles. ([8c32537](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/8c32537))
+
+### 🩹 Fixes
+
+- Hall is show property, not event. ([70b3936](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/70b3936))
+
 ## v1.0.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v0.10.2...v1.0.0)
