@@ -116,7 +116,6 @@ abstract class CinetixxHelper
 				$event->trailerUrl = trim($show->EVENT_TRAILER) ?: false;
 				$event->trailerId  = YouTubeHelper::parseYoutubeId($event->trailerUrl);
 
-				$event->hall         = (string) $show->SAAL;
 				$event->startDay     = (string) $show->STARTDAY;
 				$event->year         = (string) $show->YEAR;
 				$event->country      = (string) $show->COUNTRY;
@@ -135,6 +134,7 @@ abstract class CinetixxHelper
 			$showTmp->bookingStart = (string) $show->VERKAUFSSTART;
 			$showTmp->bookingEnd   = (string) $show->VERKAUFSENDE;
 			$showTmp->bookingLink = (string) $show->BOOKING_LINK;
+			$showTmp->hall         = (string) $show->SAAL;
 
 			$events[$eventId]->shows[] = $showTmp;
 		}
