@@ -388,6 +388,21 @@ class VeranstaltungModel extends AdminModel
 	}
 
 	/**
+	 * Get the reorder conditions for the table.
+	 * Ensures reordering is scoped to the same category.
+	 *
+	 * @param   Table  $table  The table object
+	 *
+	 * @return  array  Conditions for reordering
+	 *
+	 * @since   1.1.0
+	 */
+	protected function getReorderConditions($table)
+	{
+		return ['catid = ' . (int) $table->catid];
+	}
+
+	/**
 	 * Prepare and sanitise the table prior to saving.
 	 *
 	 * @param   \Joomla\CMS\Table\Table  $table  The Table object
@@ -402,6 +417,18 @@ class VeranstaltungModel extends AdminModel
 		if (isset($table->attribs) && is_array($table->attribs))
 		{
 			$table->attribs = json_encode($table->attribs);
+		}
+
+		// Set ordering for new articles to end of list
+		if (empty($table->id))
+		{
+			$db = $this->getDatabase();
+			$query = $db->getQuery(true)
+				->select('MAX(ordering)')
+				->from($db->quoteName('#__content'))
+				->where($db->quoteName('catid') . ' = ' . (int) $table->catid);
+			$db->setQuery($query);
+			$table->ordering = (int) $db->loadResult() + 1;
 		}
 	}
 }

@@ -4,12 +4,20 @@
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Session\Session;
 use Weltspiegel\Component\Weltspiegel\Administrator\View\Veranstaltungen\HtmlView;
 
 /** @var HtmlView $this */
 
 $listOrder     = $this->escape($this->state->get('list.ordering'));
 $listDirection = $this->escape($this->state->get('list.direction'));
+$saveOrder     = ($listOrder === 'a.ordering');
+
+if ($saveOrder)
+{
+	$saveOrderingUrl = 'index.php?option=com_weltspiegel&task=veranstaltungen.saveOrderAjax&tmpl=component&' . Session::getFormToken() . '=1';
+	HTMLHelper::_('draggablelist.draggable');
+}
 
 ?>
 <form action="<?= Route::_('index.php?option=com_weltspiegel&view=veranstaltungen') ?>" method="post" name="adminForm"
@@ -20,6 +28,9 @@ $listDirection = $this->escape($this->state->get('list.direction'));
         <table class="table">
             <thead>
             <tr>
+                <th style="width:1%" class="text-center d-none d-md-table-cell">
+                    <?= HTMLHelper::_('searchtools.sort', '', 'a.ordering', $listDirection, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING', 'icon-ellipsis-v') ?>
+                </th>
                 <th style="width:1%">
                     <?= HTMLHelper::_('grid.checkall') ?>
                 </th>
@@ -37,9 +48,15 @@ $listDirection = $this->escape($this->state->get('list.direction'));
                 </th>
             </tr>
             </thead>
-            <tbody>
+            <tbody<?php if ($saveOrder) : ?> class="js-draggable" data-url="<?= $saveOrderingUrl ?>" data-direction="<?= strtolower($listDirection) ?>"<?php endif; ?>>
             <?php foreach ($this->items as $i => $item) : ?>
-                <tr>
+                <tr data-draggable-group="1">
+                    <td class="text-center d-none d-md-table-cell">
+                        <?php if ($saveOrder) : ?>
+                            <span class="icon-ellipsis-v" aria-hidden="true"></span>
+                            <input type="text" class="hidden" name="order[]" size="5" value="<?= (int) $item->ordering ?>" />
+                        <?php endif; ?>
+                    </td>
                     <td>
                         <?= HTMLHelper::_('grid.id', $i, $item->id) ?>
                     </td>

@@ -40,6 +40,7 @@ class VeranstaltungenModel extends ListModel
 				'created', 'a.created',
 				'modified', 'a.modified',
 				'state', 'a.state',
+				'ordering', 'a.ordering',
 			];
 		}
 
@@ -63,7 +64,7 @@ class VeranstaltungenModel extends ListModel
 		// Select from content (articles) table
 		// Show all articles in category 9 (Veranstaltungen)
 		$query
-			->select('a.id, a.title, a.alias, a.state, a.created, a.modified, a.catid')
+			->select('a.id, a.title, a.alias, a.state, a.created, a.modified, a.catid, a.ordering')
 			->from($db->quoteName('#__content', 'a'))
 			->where($db->quoteName('a.catid') . ' = 9');
 
@@ -121,7 +122,7 @@ class VeranstaltungenModel extends ListModel
 	 *
 	 * @since   1.0.0
 	 */
-	protected function populateState($ordering = 'a.created', $direction = 'DESC')
+	protected function populateState($ordering = 'a.ordering', $direction = 'ASC')
 	{
 		$search = $this->getUserStateFromRequest($this->context . '.filter.search', 'filter_search', '', 'string');
 		$this->setState('filter.search', $search);
