@@ -388,6 +388,29 @@ class VeranstaltungModel extends AdminModel
 	}
 
 	/**
+	 * Method to save the ordering of rows.
+	 * Clears content cache after reordering.
+	 *
+	 * @param   array  $pks    An array of primary key ids.
+	 * @param   array  $order  An array of ordering values.
+	 *
+	 * @return  boolean  True on success.
+	 *
+	 * @since   1.1.0
+	 */
+	public function saveorder($pks = [], $order = [])
+	{
+		$result = parent::saveorder($pks, $order);
+
+		if ($result)
+		{
+			$this->cleanCache('com_content');
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Get the reorder conditions for the table.
 	 * Ensures reordering is scoped to the same category.
 	 *
