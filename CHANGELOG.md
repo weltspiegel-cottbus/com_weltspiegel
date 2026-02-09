@@ -1,3 +1,11 @@
+## v1.2.1
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v1.2.0...v1.2.1)
+
+### 🩹 Fixes
+
+- Clear cache after re-ordering. ([9fbb19f](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/9fbb19f))
+
 ## v1.2.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v1.1.0...v1.2.0)
