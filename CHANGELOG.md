@@ -1,3 +1,11 @@
+## v1.2.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v1.1.0...v1.2.0)
+
+### 🚀 Enhancements
+
+- Add ordering feature for component managed articles. ([a943834](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/a943834))
+
 ## v1.1.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v1.0.0...v1.1.0)
