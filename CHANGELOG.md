@@ -1,3 +1,15 @@
+## v1.4.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v1.3.0...v1.4.0)
+
+### 🚀 Enhancements
+
+- Install plugin layouts into global layout folder via script. ([b38ef4f](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/b38ef4f))
+
+### 💅 Refactors
+
+- Back to simple layout loading just by id. ([7eca0e9](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/7eca0e9))
+
 ## v1.3.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v1.2.1...v1.3.0)
