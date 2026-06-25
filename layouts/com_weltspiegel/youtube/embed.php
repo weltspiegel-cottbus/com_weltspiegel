@@ -53,7 +53,7 @@ $uniqueId = 'yt-' . $videoId . '-' . uniqid();
 
         <!-- YouTube iframe -->
         <iframe id="<?= $uniqueId ?>-iframe"
-                src=""
+                src="about:blank"
                 data-src="<?= htmlspecialchars($embedUrl) ?>"
                 frameborder="0"
                 allowfullscreen
