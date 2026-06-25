@@ -112,15 +112,12 @@ npm install
    - Update the `<version>` tag to match the new version
    - Update the download URL to match the new version tag and filename
 
-3. **`media/com_weltspiegel/joomla.asset.json`**:
-   - Update the `version` field to match the new version
-
-4. **`administrator/components/com_weltspiegel/sql/updates/{version}.sql`**:
+3. **`administrator/components/com_weltspiegel/sql/updates/{version}.sql`**:
    - Create a new SQL migration file named with the new version (e.g., `1.1.0.sql`)
    - For releases without database changes, use: `# Empty - No database updates`
    - This ensures Joomla's version tracking works correctly
 
-5. Commit these changes
+4. Commit these changes
 
 **Note:** Do NOT manually update `package.json` - changelogen will automatically bump the version there.
 

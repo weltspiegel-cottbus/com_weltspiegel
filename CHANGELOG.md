@@ -1,3 +1,15 @@
+## v1.3.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v1.2.1...v1.3.0)
+
+### 🚀 Enhancements
+
+- Add default gallery layout. ([0391e77](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/0391e77))
+
+### 🩹 Fixes
+
+- Move lyout and update render path. ([bf289b8](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/bf289b8))
+
 ## v1.2.1
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v1.2.0...v1.2.1)
