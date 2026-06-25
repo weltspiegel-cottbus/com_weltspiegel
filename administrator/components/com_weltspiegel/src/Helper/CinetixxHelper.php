@@ -340,4 +340,22 @@ abstract class CinetixxHelper
 
 		return $movies[$movieId] ?? false;
 	}
+
+	/**
+	 * Returns array of MOVIE_IDs (cached)
+	 *
+	 * @param   string  $mandatorId
+	 *
+	 * @return array
+	 *
+	 * @throws Exception
+	 *
+	 * @since 1.5.0
+	 */
+	public static function getMovieIds(string $mandatorId): array
+	{
+		$movies = static::getCache()->get([CinetixxHelper::class, 'getCinetixxMovies'], [$mandatorId], 'cinetixx.movies');
+
+		return array_keys($movies);
+	}
 }

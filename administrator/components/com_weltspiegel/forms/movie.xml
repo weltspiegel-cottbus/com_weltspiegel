@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <field
+            name="movie_id"
+            type="hidden"
+    />
+    <field
+            name="trailer_id"
+            type="text"
+            label="YouTube Link oder Video ID"
+    />
+    <field
+            name="poster"
+            type="media"
+            label="Poster"
+    />
+    <field
+            name="poster_big"
+            type="media"
+            label="Poster (Groß)"
+    />
+</form>
