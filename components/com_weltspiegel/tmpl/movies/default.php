@@ -52,6 +52,20 @@ $futureHeadingShown = false;
                     FSK: <?= $movie->fsk ?>
                 </div>
             </div>
+            <ul>
+                <?php foreach ($movie->formats as $format): ?>
+                    <?php foreach ($format->shows as $show): ?>
+                        <li>
+                            <?= htmlspecialchars($format->title) ?> —
+                            <?= htmlspecialchars($show->showStart) ?> —
+                            <?= htmlspecialchars($show->hall) ?>
+                            <?php if ($show->bookingLink): ?>
+                                — <a href="<?= htmlspecialchars($show->bookingLink) ?>">Tickets</a>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            </ul>
 
         <?php endforeach; ?>
     </div>
