@@ -33,7 +33,7 @@
     <administration>
         <menu>COM_WELTSPIEGEL</menu>
         <submenu>
-            <menu link="option=com_weltspiegel&amp;view=cinetixx">COM_WELTSPIEGEL_MENU_CINETIXX</menu>
+            <menu link="option=com_weltspiegel&amp;view=movies">COM_WELTSPIEGEL_MENU_MOVIES</menu>
             <menu link="option=com_weltspiegel&amp;view=vorschauen">COM_WELTSPIEGEL_MENU_VORSCHAUEN</menu>
             <menu link="option=com_weltspiegel&amp;view=veranstaltungen">COM_WELTSPIEGEL_MENU_VERANSTALTUNGEN</menu>
         </submenu>
