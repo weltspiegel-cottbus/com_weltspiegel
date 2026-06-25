@@ -23,7 +23,7 @@ $event = $this->item;
     <?= LayoutHelper::render('booking.showbox', $event) ?>
 
     <?php if (!empty($event->trailerId)): ?>
-        <?= LayoutHelper::render('youtube.embed', ['videoId' => $event->trailerId]) ?>
+        <?= LayoutHelper::render('com_weltspiegel.youtube.embed', ['videoId' => $event->trailerId], JPATH_SITE . '/components/com_weltspiegel/layouts') ?>
     <?php endif; ?>
 
     <div class="mt-4 d-flex justify-content-around gap-2">
