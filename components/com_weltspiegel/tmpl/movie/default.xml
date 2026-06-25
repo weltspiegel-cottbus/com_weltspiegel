@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="Film">
+        <message>Einzelner Film</message>
+    </layout>
+    <fields name="request">
+        <fieldset name="request">
+            <field
+                    name="movie_id"
+                    type="text"
+                    label="Cinetixx Movie ID"
+                    required="true" />
+        </fieldset>
+    </fields>
+</metadata>
