@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<form>
+    <fields name="list">
+        <field
+                name="fullordering"
+                type="list"
+                label="JGLOBAL_SORT_BY"
+                class="js-select-submit-on-change"
+                validate="options">
+            <option value="">JGLOBAL_SORT_BY</option>
+            <option value="title ASC">Film aufsteigend</option>
+            <option value="title DESC">Film absteigend</option>
+        </field>
+    </fields>
+</form>
