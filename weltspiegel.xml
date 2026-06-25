@@ -2,8 +2,8 @@
 <extension type="component" method="upgrade">
 
     <name>Weltspiegel</name>
-    <version>1.4.0</version>
-    <creationDate>25.11.2025</creationDate>
+    <version>1.5.0</version>
+    <creationDate>25.06.2026</creationDate>
     <author>Michael Buchholz</author>
     <authorEmail>mail@lean-stack.rocks</authorEmail>
     <copyright>Weltspiegel Cottbus</copyright>
