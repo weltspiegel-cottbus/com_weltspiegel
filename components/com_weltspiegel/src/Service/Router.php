@@ -45,11 +45,87 @@ class Router extends RouterView
 		$cinetixxitem->setKey('event_id')->setParent($cinetixx);
 		$this->registerView($cinetixxitem);
 
+		$movies = new RouterViewConfiguration('movies');
+		$this->registerView($movies);
+
+		$movie = new RouterViewConfiguration('movie');
+		$movie->setKey('movie_id')->setParent($movies);
+		$this->registerView($movie);
+
 		parent::__construct($app, $menu);
 
 		$this->attachRule(new MenuRules($this));
 		$this->attachRule(new StandardRules($this));
 		$this->attachRule(new NomenuRules($this));
+	}
+
+	/**
+	 * Method to get the segment for a movie view
+	 *
+	 * @param   string  $id     MOVIE_ID
+	 * @param   array   $query  The request query
+	 *
+	 * @return  array  The segment for this movie
+	 *
+	 * @since 1.5.0
+	 */
+	public function getMovieSegment(string $id, array $query): array
+	{
+		if (empty($id)) {
+			return [];
+		}
+
+		$params     = ComponentHelper::getParams('com_weltspiegel');
+		$mandatorId = $params->get('mandator_id');
+
+		$movie = CinetixxHelper::getMovie($mandatorId, $id);
+
+		if ($movie === false || empty($movie->title)) {
+			return [$id => $id];
+		}
+
+		$slug = OutputFilter::stringURLSafe($movie->title, 'de-DE');
+
+		if (empty($slug)) {
+			return [$id => $id];
+		}
+
+		return [$id => $id . '-' . $slug];
+	}
+
+	/**
+	 * Method to get the MOVIE_ID for a movie view from a segment
+	 *
+	 * @param   string  $segment  Segment to retrieve the MOVIE_ID from
+	 * @param   array   $query    The request query
+	 *
+	 * @return  string|false  The MOVIE_ID or false if not found
+	 *
+	 * @since 1.5.0
+	 */
+	public function getMovieId(string $segment, array $query): string|false
+	{
+		if (empty($segment)) {
+			return false;
+		}
+
+		$parts   = explode('-', $segment, 2);
+		$movieId = $parts[0];
+
+		if (empty($movieId)) {
+			return false;
+		}
+
+		$params     = ComponentHelper::getParams('com_weltspiegel');
+		$mandatorId = $params->get('mandator_id');
+
+		$movie = CinetixxHelper::getMovie($mandatorId, $movieId);
+
+		if ($movie === false) {
+			return false;
+		}
+
+		return $movieId;
 	}
 
 	/**
