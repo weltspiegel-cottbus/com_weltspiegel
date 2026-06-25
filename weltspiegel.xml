@@ -12,6 +12,8 @@
 
     <namespace path="src">Weltspiegel\Component\Weltspiegel</namespace>
 
+    <scriptfile>script.php</scriptfile>
+
     <install>
         <sql>
             <file driver="mysql" charset="utf8">sql/weltspiegel.install.sql</file>
