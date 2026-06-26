@@ -1,3 +1,22 @@
+## v1.5.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v1.4.0...v1.5.0)
+
+### 🚀 Enhancements
+
+- Add movie-centric CinetixxHelper methods (getMovies, getMovie) ([182a34d](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/182a34d))
+- Add #__ws_cinetixx_movies table (v1.5.0) ([1a12e97](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/1a12e97))
+- Add Movies/Movie models (admin + site) for movie-centric data ([6c9bc2a](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/6c9bc2a))
+- Register movies/movie routes in component router ([782efbb](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/782efbb))
+- Add Movies/Movie admin views, controllers and templates ([3290268](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/3290268))
+- Point Cinetixx admin menu  to movies view ([159c404](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/159c404))
+- Add movies/movie frontend views and templates ([0cd0d6e](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/0cd0d6e))
+- Add flat show list to movies/movie component templates ([c6f05f2](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/c6f05f2))
+
+### 🩹 Fixes
+
+- Load initially blank page into iframe. ([1da98e0](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/1da98e0))
+
 ## v1.4.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v1.3.0...v1.4.0)
