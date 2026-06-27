@@ -1,3 +1,16 @@
+## v2.0.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v1.5.0...v2.0.0)
+
+### 🚀 Enhancements
+
+- Remove EVENT_ID-based cinetixx MVC, bump to v2.0.0 ([acd96c4](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/acd96c4))
+
+### 🏡 Chore
+
+- **com:** Remove unused booking/link layout from site component ([8dd67f4](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/8dd67f4))
+- Format and lint files. ([3aaefd2](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/3aaefd2))
+
 ## v1.5.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v1.4.0...v1.5.0)
