@@ -2,12 +2,12 @@
   "name": "com_weltspiegel",
   "version": "1.5.0",
   "description": "Joomla-Komponente für den Weltspiegel Cottbus",
-  "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/weltspiegel-cottbus/com_weltspiegel.git"
   },
+  "type": "module",
   "scripts": {
     "build": "echo 'No assets to build for this component'",
     "package": "node .build/package.mjs",
