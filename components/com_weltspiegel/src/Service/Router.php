@@ -38,13 +38,6 @@ class Router extends RouterView
 	 */
 	public function __construct(SiteApplication $app, AbstractMenu $menu)
 	{
-		$cinetixx = new RouterViewConfiguration('cinetixx');
-		$this->registerView($cinetixx);
-
-		$cinetixxitem = new RouterViewConfiguration('cinetixxitem');
-		$cinetixxitem->setKey('event_id')->setParent($cinetixx);
-		$this->registerView($cinetixxitem);
-
 		$movies = new RouterViewConfiguration('movies');
 		$this->registerView($movies);
 
@@ -128,72 +121,4 @@ class Router extends RouterView
 		return $movieId;
 	}
 
-	/**
-	 * Method to get the segment for a cinetixxitem view
-	 *
-	 * @param   string  $id     ID of the event
-	 * @param   array   $query  The request query
-	 *
-	 * @return  array  The segment for this item
-	 *
-	 * @since 1.0.0
-	 */
-	public function getCinetixxitemSegment($id, $query): array
-	{
-		if (empty($id)) {
-			return [];
-		}
-
-		$params = ComponentHelper::getParams('com_weltspiegel');
-		$mandatorId = $params->get('mandator_id');
-
-		$event = CinetixxHelper::getEvent($mandatorId, $id);
-
-		if ($event === false || empty($event->title)) {
-			return [$id => $id];
-		}
-
-		$slug = OutputFilter::stringURLSafe($event->title, 'de-DE');
-
-		if (empty($slug)) {
-			return [$id => $id];
-		}
-
-		return [$id => $id . '-' . $slug];
-	}
-
-	/**
-	 * Method to get the id for a cinetixxitem view from a segment
-	 *
-	 * @param   string  $segment  Segment to retrieve the ID from
-	 * @param   array   $query    The request query
-	 *
-	 * @return  int|false  The ID or false if not found
-	 *
-	 * @since 1.0.0
-	 */
-	public function getCinetixxitemId($segment, $query): int|false
-	{
-		if (empty($segment)) {
-			return false;
-		}
-
-		$parts = explode('-', $segment, 2);
-		$id = (int) $parts[0];
-
-		if ($id <= 0) {
-			return false;
-		}
-
-		$params = ComponentHelper::getParams('com_weltspiegel');
-		$mandatorId = $params->get('mandator_id');
-
-		$event = CinetixxHelper::getEvent($mandatorId, (string) $id);
-
-		if ($event === false) {
-			return false;
-		}
-
-		return $id;
-	}
 }

@@ -26,5 +26,5 @@ class DisplayController extends BaseController
 	 * @var string
 	 * @since version 1.0.0
 	 */
-	protected $default_view = 'cinetixx';
+	protected $default_view = 'movies';
 }

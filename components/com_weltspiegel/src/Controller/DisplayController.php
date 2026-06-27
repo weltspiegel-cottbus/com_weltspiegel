@@ -20,5 +20,5 @@ use Joomla\CMS\MVC\Controller\BaseController;
  */
 class DisplayController extends BaseController
 {
-	protected $default_view = 'cinetixx';
+	protected $default_view = 'movies';
 }
