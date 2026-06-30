@@ -89,7 +89,20 @@ abstract class CinetixxHelper
 				$movie = new stdClass();
 
 				$movie->movieId = $movieId;
-				$movie->title   = (string) $show->VERANSTALTUNGSKURZTITEL;
+
+				// FIXME: Titel-Quelle ist eine ungelöste Baustelle — KEINE der beiden Optionen ist sauber!
+				// ---------------------------------------------------------------------------------------
+				// Vorher: VERANSTALTUNGSKURZTITEL — gedacht für Kassendisplays (zeichenbegrenzt), daher
+				//   teils unschöne, manuell gekürzte Titel (z.B. "Sylvesterkonzert", "Obsession").
+				// Jetzt:  VERANSTALTUNGSTITEL — von Cinetixx AUTOGENERIERT aus dem Filmtitel + redundanten
+				//   Zusätzen (3D, Sprache D/OmU/OV, FSK). Der Klient entfernt diese Redundanz aktuell
+				//   manuell PRO Show im Cinetixx-Desktop-Client. Zusätzlich ist dieser Titel EVENT-Ebene
+				//   (variiert je Format-Variante) und wir greifen hier nur die ERSTE Show ab — die nach
+				//   wenigen Stunden schon die nächste ist. Also ebenfalls unzuverlässig.
+				// → Die finale Lösung erfordert ein Gespräch mit Cinetixx (ein sauberes Titel-Feld) und
+				//   ist Aufgabe des Klienten. Bis dahin nutzen wir bewusst VERANSTALTUNGSTITEL, um das
+				//   Problem sichtbar zu machen. Siehe docs/API.md (MOVIE→EVENT→SHOW) für Beispiele.
+				$movie->title = (string) $show->VERANSTALTUNGSTITEL;
 
 				$movie->text      = trim($show->TEXT);
 				$movie->textShort = trim($show->TEXT_SHORT);
