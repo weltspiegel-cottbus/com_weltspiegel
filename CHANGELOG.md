@@ -1,3 +1,11 @@
+## v2.1.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v2.0.0...v2.1.0)
+
+### 💅 Refactors
+
+- Use full title. ([7ea8298](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/7ea8298))
+
 ## v2.0.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v1.5.0...v2.0.0)
