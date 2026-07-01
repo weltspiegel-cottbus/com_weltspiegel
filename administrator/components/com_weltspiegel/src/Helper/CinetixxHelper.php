@@ -102,6 +102,10 @@ abstract class CinetixxHelper
 				// → Die finale Lösung erfordert ein Gespräch mit Cinetixx (ein sauberes Titel-Feld) und
 				//   ist Aufgabe des Klienten. Bis dahin nutzen wir bewusst VERANSTALTUNGSTITEL, um das
 				//   Problem sichtbar zu machen. Siehe docs/API.md (MOVIE→EVENT→SHOW) für Beispiele.
+				// Übergangs-Workaround: Der Klient kann seit v2.2.0 pro Film einen Titel-Override im
+				//   Admin-Bereich (Cinetixx-Filme bearbeiten) hinterlegen, siehe `#__ws_cinetixx_movies.title`.
+				//   Dieser hat Vorrang (siehe site-seitige MovieModel/MoviesModel), ändert aber nichts an
+				//   der grundsätzlichen Baustelle hier.
 				$movie->title = (string) $show->VERANSTALTUNGSTITEL;
 
 				$movie->text      = trim($show->TEXT);

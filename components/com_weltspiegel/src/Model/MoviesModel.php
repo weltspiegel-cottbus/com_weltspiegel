@@ -70,6 +70,9 @@ class MoviesModel extends ListModel
 				if (!isset($movies[$item->movie_id])) {
 					continue;
 				}
+				if (!empty($item->title)) {
+					$movies[$item->movie_id]->title = $item->title;
+				}
 				if (!empty($item->trailer_id)) {
 					$movies[$item->movie_id]->trailerId = $item->trailer_id;
 				}
@@ -102,7 +105,7 @@ class MoviesModel extends ListModel
 		$query = $db->createQuery();
 
 		$query
-			->select('id, movie_id, trailer_id, poster, poster_big')
+			->select('id, movie_id, title, trailer_id, poster, poster_big')
 			->from('#__ws_cinetixx_movies')
 			->whereIn('movie_id', $movieIds);
 

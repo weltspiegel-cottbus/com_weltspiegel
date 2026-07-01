@@ -15,6 +15,7 @@ $wa->useScript('form.validate');
         method="post" name="adminForm" id="item-form" class="form-validate">
 
     <?php echo $this->form->renderField('movie_id'); ?>
+    <?php echo $this->form->renderField('title'); ?>
     <?php echo $this->form->renderField('trailer_id'); ?>
     <?php echo $this->form->renderField('poster'); ?>
     <?php echo $this->form->renderField('poster_big'); ?>

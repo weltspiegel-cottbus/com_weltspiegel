@@ -83,6 +83,7 @@ class MoviesModel extends ListModel
 				// Database override props
 				'id'                => 0,
 				'movie_id'          => $movie->movieId,
+				'title'             => null,
 				'trailer_id'        => null,
 				'poster'            => null,
 				'poster_big'        => null,
@@ -95,6 +96,7 @@ class MoviesModel extends ListModel
 				if ($itemIx !== false)
 				{
 					$mergedItem['id']         = $items[$itemIx]->id;
+					$mergedItem['title']      = $items[$itemIx]->title;
 					$mergedItem['trailer_id'] = $items[$itemIx]->trailer_id;
 					$mergedItem['poster']     = $items[$itemIx]->poster;
 					$mergedItem['poster_big'] = $items[$itemIx]->poster_big;
@@ -130,7 +132,7 @@ class MoviesModel extends ListModel
 		$query = $db->createQuery();
 
 		$query
-			->select('id, movie_id, trailer_id, poster, poster_big')
+			->select('id, movie_id, title, trailer_id, poster, poster_big')
 			->from('#__ws_cinetixx_movies')
 			->whereIn('movie_id', $movieIds);
 

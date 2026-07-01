@@ -5,6 +5,12 @@
             type="hidden"
     />
     <field
+            name="title"
+            type="text"
+            label="Titel"
+            description="Überschreibt den von Cinetixx gelieferten Titel (der teils zeichenbegrenzte Kassentitel oder ein automatisch generierter, redundanter Titel mit 3D/Sprache/FSK-Zusätzen ist). Leer lassen, um den Cinetixx-Titel zu verwenden."
+    />
+    <field
             name="trailer_id"
             type="text"
             label="YouTube Link oder Video ID"

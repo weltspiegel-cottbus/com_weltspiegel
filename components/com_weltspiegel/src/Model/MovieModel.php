@@ -57,6 +57,10 @@ class MovieModel extends ItemModel
 		$item = $db->loadObject();
 		if (!empty($item))
 		{
+			if (!empty($item->title))
+			{
+				$movie->title = $item->title;
+			}
 			if (!empty($item->trailer_id))
 			{
 				$movie->trailerId = $item->trailer_id;

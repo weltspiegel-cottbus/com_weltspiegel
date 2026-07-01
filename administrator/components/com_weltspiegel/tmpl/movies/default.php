@@ -37,8 +37,13 @@ $listDirection = $this->escape($this->state->get('list.direction'));
                     <th scope="row">
                         <a href="<?= Route::_('index.php?option=com_weltspiegel&task=movie.edit&id=' . $item->id . '&movie_id=' . $item->movie_id) ?>"
                            title="<?= \Joomla\CMS\Language\Text::_('JACTION_EDIT') ?>">
-                            <?= $item->cinetixxTitle ?>
+                            <?= $this->escape($item->title ?: $item->cinetixxTitle) ?>
                         </a>
+                        <?php if ($item->title) : ?>
+                            <div class="small text-secondary-emphasis">
+                                Cinetixx-Titel: <?= $this->escape($item->cinetixxTitle) ?>
+                            </div>
+                        <?php endif; ?>
                     </th>
                     <td>
                         <?php if ($item->trailer_id) : ?>

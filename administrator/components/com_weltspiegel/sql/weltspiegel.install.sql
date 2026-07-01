@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS `#__ws_cinetixx_movies`
 (
     `id`          INT AUTO_INCREMENT PRIMARY KEY,
     `movie_id`    VARCHAR(32) NOT NULL DEFAULT '',
+    `title`       VARCHAR(255),
     `trailer_id`  VARCHAR(32),
     `poster`      VARCHAR(512),
     `poster_big`  VARCHAR(512),

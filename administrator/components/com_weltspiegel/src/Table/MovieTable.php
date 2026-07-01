@@ -46,6 +46,8 @@ class MovieTable extends Table
 	{
 		parent::check();
 
+		$this->title = trim($this->title ?? '');
+
 		$this->trailer_id = trim($this->trailer_id ?? '');
 		if ($this->trailer_id !== '') {
 			if (!preg_match("/^[\w-]{11}$/", $this->trailer_id)) {
