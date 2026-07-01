@@ -1,3 +1,11 @@
+## v2.2.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v2.1.0...v2.2.0)
+
+### 🚀 Enhancements
+
+- **movie:** Titel-Override im Admin-Bereich (Übergangslösung) ([ab56205](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/ab56205))
+
 ## v2.1.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v2.0.0...v2.1.0)
