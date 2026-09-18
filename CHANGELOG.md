@@ -1,3 +1,11 @@
+## v2.4.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v2.3.0...v2.4.0)
+
+### 🚀 Enhancements
+
+- Switch the programme day filter on for everyone ([d8ff7e9](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/d8ff7e9))
+
 ## v2.3.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v2.2.0...v2.3.0)
