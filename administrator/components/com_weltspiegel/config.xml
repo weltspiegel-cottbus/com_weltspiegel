@@ -3,4 +3,17 @@
     <fieldset name="cinetixx" label="Cinetixx">
         <field name="mandator_id" type="text" default="" label="Mandator ID" />
     </fieldset>
+
+    <fieldset name="notice" label="Programm-Hinweis"
+              description="Ein Hinweis, der über der Programmübersicht erscheint — etwa wenn das Haus für eine Fremdveranstaltung vermietet ist und in dieser Zeit kein eigenes Programm läuft. Der Text bleibt gespeichert, wenn der Hinweis ausgeschaltet wird, und kann im nächsten Jahr wiederverwendet werden.">
+        <field name="notice_enabled" type="radio" layout="joomla.form.field.radio.switcher"
+               default="0" label="Hinweis anzeigen">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+
+        <field name="notice_text" type="editor" filter="safehtml" buttons="false" height="180"
+               label="Hinweistext"
+               description="Kurzer Text, gern mit Link auf die Veranstaltungsseite." />
+    </fieldset>
 </config>
