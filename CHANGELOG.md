@@ -1,3 +1,11 @@
+## v2.3.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v2.2.0...v2.3.0)
+
+### 🚀 Enhancements
+
+- Add a day filter and an editorial notice to the programme page ([e2a5a7e](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/e2a5a7e))
+
 ## v2.2.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v2.1.0...v2.2.0)
