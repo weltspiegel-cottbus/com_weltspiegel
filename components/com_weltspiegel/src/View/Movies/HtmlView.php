@@ -36,14 +36,6 @@ class HtmlView extends BaseHtmlView
 	protected array $items;
 
 	/**
-	 * Whether the day filter is shown at all (temporary preview flag).
-	 *
-	 * @var bool
-	 * @since 2.3.0
-	 */
-	protected bool $filterEnabled = false;
-
-	/**
 	 * Selected day, one of the keys of DayFilterHelper::TAGS, or null.
 	 *
 	 * @var string|null
@@ -99,12 +91,11 @@ class HtmlView extends BaseHtmlView
 		$model       = $this->getModel();
 		$this->items = $model->getItems();
 
-		$this->filterEnabled = DayFilterHelper::isPreviewEnabled();
 		// The chips and the title describe what is on screen, not what was asked
 		// for: after a fallback the requested day is not the one being shown.
 		$this->activeTag     = $model->getEffectiveTag();
 		$this->fallbackFrom  = $model->getFallbackFrom();
-		$this->availableTags = $this->filterEnabled ? $model->getAvailableTags() : [];
+		$this->availableTags = $model->getAvailableTags();
 		$this->highlightDate = $model->getEffectiveDay()?->format('Y-m-d');
 
 		$params       = ComponentHelper::getParams('com_weltspiegel');
