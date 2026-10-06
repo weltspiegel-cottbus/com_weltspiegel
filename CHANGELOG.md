@@ -1,3 +1,15 @@
+## v2.5.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v2.4.0...v2.5.0)
+
+### 🚀 Enhancements
+
+- Report how far the programme reaches ([6f0baa9](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/6f0baa9))
+
+### 🩹 Fixes
+
+- Keep the programme page alive when Cinetixx is slow or gone ([3158ac4](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/3158ac4))
+
 ## v2.4.0
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v2.3.0...v2.4.0)
