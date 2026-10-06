@@ -11,6 +11,7 @@ namespace Weltspiegel\Component\Weltspiegel\Administrator\Helper;
 \defined('_JEXEC') or die;
 
 use Exception;
+use RuntimeException;
 use Joomla\CMS\Cache\CacheControllerFactoryInterface;
 use Joomla\CMS\Cache\Controller\CallbackController;
 use Joomla\CMS\Factory;
@@ -32,6 +33,42 @@ abstract class CinetixxHelper
 	 * @since 1.0.0
 	 */
 	private const string svcUrl = 'https://api.cinetixx.de/Services/CinetixxService.asmx/GetShowInfoV6';
+
+	/**
+	 * Seconds the Cinetixx service may take, for connecting and in total.
+	 *
+	 * Without a limit the request hangs until PHP's own max_execution_time ends
+	 * the whole page with a fatal error. The service needs 1-3 seconds when all is
+	 * well and a good deal more over a poor line, so this is generous - but well
+	 * below the 30 seconds PHP allows.
+	 *
+	 * @since 2.5.0
+	 */
+	private const int requestTimeout = 15;
+
+	/**
+	 * How old the last good copy of the programme may be and still stand in for
+	 * a service that does not answer, in seconds. Past shows are filtered out
+	 * further down anyway, so what a stale copy still offers is only what lies
+	 * ahead - a week is the point where that is no longer worth showing.
+	 *
+	 * @since 2.5.0
+	 */
+	private const int staleLifetime = 604800;
+
+	/**
+	 * The movie list as already loaded in this request, per mandator.
+	 *
+	 * One page asks for it many times - the router alone once per link. With the
+	 * system cache switched off (as in development) every one of those asks used
+	 * to be a request to the service; with it on, a read and unserialize of the
+	 * whole cached list.
+	 *
+	 * @var array<string, array>
+	 *
+	 * @since 2.5.0
+	 */
+	private static array $loaded = [];
 
 	/**
 	 * Internal cached cache controller
@@ -71,11 +108,66 @@ abstract class CinetixxHelper
 	 */
 	public static function getCinetixxMovies(string $mandatorId): array
 	{
+		try {
+			$movies = static::fetchMovies($mandatorId);
+		} catch (Exception $e) {
+			// The service does not answer, or not usably. A page that still shows
+			// the programme as it was a moment ago serves visitors better than an
+			// error page - and since this result is cached like any other, the
+			// service is asked again only after the cache lifetime, not on every
+			// request.
+			$stale = static::readLastGood();
+
+			if ($stale === null) {
+				throw new RuntimeException('Das Programm kann gerade nicht geladen werden.', 503, $e);
+			}
+
+			$app = Factory::getApplication();
+
+			if ($app->isClient('administrator')) {
+				$app->enqueueMessage('Cinetixx antwortet nicht - angezeigt wird der zuletzt geladene Stand.', 'warning');
+			}
+
+			return $stale;
+		}
+
+		static::writeLastGood($movies);
+
+		return $movies;
+	}
+
+	/**
+	 * Asks the Cinetixx web service for the programme and parses the answer.
+	 *
+	 * @param   string  $mandatorId
+	 *
+	 * @return array  Keyed by MOVIE_ID
+	 *
+	 * @throws RuntimeException  When the service is unreachable, slow or answers with something unusable
+	 *
+	 * @since 2.5.0
+	 */
+	private static function fetchMovies(string $mandatorId): array
+	{
 		$url      = static::svcUrl . "?mandatorId=$mandatorId";
 		$http     = new Http();
-		$response = $http->get($url);
+		$response = $http->get($url, [], static::requestTimeout);
 
-		$xml    = simplexml_load_string($response->getBody());
+		if ($response->getStatusCode() !== 200) {
+			throw new RuntimeException('Cinetixx antwortet mit Status ' . $response->getStatusCode());
+		}
+
+		// An HTML error page instead of the XML would otherwise put a dozen parser
+		// warnings into the server log for every request.
+		$previous = libxml_use_internal_errors(true);
+		$xml      = simplexml_load_string((string) $response->getBody());
+		libxml_clear_errors();
+		libxml_use_internal_errors($previous);
+
+		if ($xml === false) {
+			throw new RuntimeException('Cinetixx liefert keine auswertbare Antwort');
+		}
+
 		$movies = [];
 
 		foreach ($xml->Show as $show)
@@ -182,6 +274,85 @@ abstract class CinetixxHelper
 	}
 
 	/**
+	 * The movie list, from the system cache or the service, loaded once per request.
+	 *
+	 * @param   string  $mandatorId
+	 *
+	 * @return array  Keyed by MOVIE_ID
+	 *
+	 * @throws Exception
+	 *
+	 * @since 2.5.0
+	 */
+	private static function load(string $mandatorId): array
+	{
+		return static::$loaded[$mandatorId] ??= static::getCache()
+			->get([CinetixxHelper::class, 'getCinetixxMovies'], [$mandatorId], 'cinetixx.movies');
+	}
+
+	/**
+	 * Where the last good copy of the programme is kept.
+	 *
+	 * A plain file next to the system cache rather than an entry in it: the cache
+	 * may be switched off, and its entries expire after minutes, which is just
+	 * what this copy has to outlive.
+	 *
+	 * @return string
+	 *
+	 * @since 2.5.0
+	 */
+	private static function lastGoodFile(): string
+	{
+		return rtrim((string) Factory::getApplication()->get('cache_path', JPATH_CACHE), '/')
+			. '/com_weltspiegel-cinetixx-last-good.ser';
+	}
+
+	/**
+	 * Remembers a successfully loaded programme. Best effort: failing to write
+	 * only means no stand-in is available later.
+	 *
+	 * @param   array  $movies
+	 *
+	 * @return void
+	 *
+	 * @since 2.5.0
+	 */
+	private static function writeLastGood(array $movies): void
+	{
+		$file = static::lastGoodFile();
+		$temp = $file . '.' . getmypid() . '.tmp';
+
+		// Written aside and moved into place, so a reader never meets half a file.
+		if (@file_put_contents($temp, serialize($movies), LOCK_EX) === false) {
+			return;
+		}
+
+		if (!@rename($temp, $file)) {
+			@unlink($temp);
+		}
+	}
+
+	/**
+	 * The last good copy of the programme, if there is one that is recent enough.
+	 *
+	 * @return array|null
+	 *
+	 * @since 2.5.0
+	 */
+	private static function readLastGood(): ?array
+	{
+		$file = static::lastGoodFile();
+
+		if (!is_file($file) || time() - (int) filemtime($file) > static::staleLifetime) {
+			return null;
+		}
+
+		$data = @unserialize((string) @file_get_contents($file), ['allowed_classes' => [stdClass::class]]);
+
+		return \is_array($data) && $data !== [] ? $data : null;
+	}
+
+	/**
 	 * Returns all movies from the Cinetixx web service (cached)
 	 *
 	 * @param   string  $mandatorId
@@ -194,7 +365,7 @@ abstract class CinetixxHelper
 	 */
 	public static function getMovies(string $mandatorId): array
 	{
-		return static::getCache()->get([CinetixxHelper::class, 'getCinetixxMovies'], [$mandatorId], 'cinetixx.movies');
+		return static::load($mandatorId);
 	}
 
 	/**
@@ -211,7 +382,7 @@ abstract class CinetixxHelper
 	 */
 	public static function getMovie(string $mandatorId, string $movieId): stdClass|false
 	{
-		$movies = static::getCache()->get([CinetixxHelper::class, 'getCinetixxMovies'], [$mandatorId], 'cinetixx.movies');
+		$movies = static::load($mandatorId);
 
 		return $movies[$movieId] ?? false;
 	}
@@ -229,7 +400,7 @@ abstract class CinetixxHelper
 	 */
 	public static function getMovieIds(string $mandatorId): array
 	{
-		$movies = static::getCache()->get([CinetixxHelper::class, 'getCinetixxMovies'], [$mandatorId], 'cinetixx.movies');
+		$movies = static::load($mandatorId);
 
 		return array_keys($movies);
 	}
