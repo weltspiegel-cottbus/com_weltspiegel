@@ -68,6 +68,14 @@ class HtmlView extends BaseHtmlView
 	protected ?string $highlightDate = null;
 
 	/**
+	 * Start of the last show still to come — how far the programme reaches.
+	 *
+	 * @var \DateTimeImmutable|null
+	 * @since 2.5.0
+	 */
+	protected ?\DateTimeImmutable $programmeEnd = null;
+
+	/**
 	 * Editorial notice shown above the listing, empty when switched off.
 	 *
 	 * Independent of the day filter: it has to work in production regardless of
@@ -97,6 +105,7 @@ class HtmlView extends BaseHtmlView
 		$this->fallbackFrom  = $model->getFallbackFrom();
 		$this->availableTags = $model->getAvailableTags();
 		$this->highlightDate = $model->getEffectiveDay()?->format('Y-m-d');
+		$this->programmeEnd  = $model->getProgrammeEnd();
 
 		$params       = ComponentHelper::getParams('com_weltspiegel');
 		$this->notice = $params->get('notice_enabled', 0)

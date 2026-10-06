@@ -267,6 +267,24 @@ class MoviesModel extends ListModel
 	}
 
 	/**
+	 * When the last show still to come starts, ignoring the day filter.
+	 *
+	 * @return  \DateTimeImmutable|null
+	 *
+	 * @throws Exception
+	 *
+	 * @since 2.5.0
+	 */
+	public function getProgrammeEnd(): ?\DateTimeImmutable
+	{
+		if ($this->allMovies === null) {
+			$this->getItems();
+		}
+
+		return ShowtimeHelper::lastUpcomingStart($this->allMovies ?? []);
+	}
+
+	/**
 	 * Build an SQL query to load the movie DB overrides.
 	 *
 	 * @return QueryInterface

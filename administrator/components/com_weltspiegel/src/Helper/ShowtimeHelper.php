@@ -132,6 +132,39 @@ abstract class ShowtimeHelper
 	}
 
 	/**
+	 * The start of the last show still to come, across a whole movie list.
+	 *
+	 * Tells the programme page how far ahead it reaches: visitors who only see
+	 * "Today" and "Tomorrow" in the day filter take that for the horizon.
+	 *
+	 * @param   array                   $movies  Movies as built by CinetixxHelper
+	 * @param   DateTimeImmutable|null  $now    Reference point, defaults to now
+	 *
+	 * @return  DateTimeImmutable|null  Null when nothing is left to come
+	 *
+	 * @since 2.5.0
+	 */
+	public static function lastUpcomingStart(array $movies, ?DateTimeImmutable $now = null): ?DateTimeImmutable
+	{
+		$now ??= static::now();
+		$last  = null;
+
+		foreach ($movies as $movie) {
+			foreach ($movie->formats ?? [] as $format) {
+				foreach ($format->shows ?? [] as $show) {
+					$start = static::startOf($show);
+
+					if ($start !== null && $start > $now && ($last === null || $start > $last)) {
+						$last = $start;
+					}
+				}
+			}
+		}
+
+		return $last?->setTimezone(static::timezone());
+	}
+
+	/**
 	 * Parse a show's start time.
 	 *
 	 * @param   stdClass  $show  A show as built by CinetixxHelper
