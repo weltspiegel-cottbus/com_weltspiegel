@@ -1,3 +1,11 @@
+## v2.6.0
+
+[compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v2.5.1...v2.6.0)
+
+### 🚀 Enhancements
+
+- Let the notice replace the programme while the house is closed ([5d5bb27](https://github.com/weltspiegel-cottbus/com_weltspiegel/commit/5d5bb27))
+
 ## v2.5.1
 
 [compare changes](https://github.com/weltspiegel-cottbus/com_weltspiegel/compare/v2.5.0...v2.5.1)
