@@ -89,28 +89,50 @@ class HtmlView extends BaseHtmlView
 	protected string $notice = '';
 
 	/**
+	 * Whether the page shows only the notice, with neither the day filter nor
+	 * any film.
+	 *
+	 * For when the house is closed but Cinetixx still lists shows. Only in force
+	 * while the notice itself is switched on, so a forgotten switch cannot leave
+	 * the programme hidden without any explanation on the page.
+	 *
+	 * @var bool
+	 * @since 2.6.0
+	 */
+	protected bool $hideProgramme = false;
+
+	/**
 	 * @param   string  $tpl
 	 * @throws Exception
 	 * @since 1.5.0
 	 */
 	public function display($tpl = null): void
 	{
-		/** @var MoviesModel $model */
-		$model       = $this->getModel();
-		$this->items = $model->getItems();
-
-		// The chips and the title describe what is on screen, not what was asked
-		// for: after a fallback the requested day is not the one being shown.
-		$this->activeTag     = $model->getEffectiveTag();
-		$this->fallbackFrom  = $model->getFallbackFrom();
-		$this->availableTags = $model->getAvailableTags();
-		$this->highlightDate = $model->getEffectiveDay()?->format('Y-m-d');
-		$this->programmeEnd  = $model->getProgrammeEnd();
-
 		$params       = ComponentHelper::getParams('com_weltspiegel');
 		$this->notice = $params->get('notice_enabled', 0)
 			? trim((string) $params->get('notice_text', ''))
 			: '';
+
+		// Without a text there is nothing to show instead of the programme.
+		$this->hideProgramme = $this->notice !== '' && (bool) $params->get('notice_hide_programme', 0);
+
+		if ($this->hideProgramme) {
+			// Not even loaded: the page has no use for the data, and a service
+			// that is down cannot get in the way of the notice either.
+			$this->items = [];
+		} else {
+			/** @var MoviesModel $model */
+			$model       = $this->getModel();
+			$this->items = $model->getItems();
+
+			// The chips and the title describe what is on screen, not what was asked
+			// for: after a fallback the requested day is not the one being shown.
+			$this->activeTag     = $model->getEffectiveTag();
+			$this->fallbackFrom  = $model->getFallbackFrom();
+			$this->availableTags = $model->getAvailableTags();
+			$this->highlightDate = $model->getEffectiveDay()?->format('Y-m-d');
+			$this->programmeEnd  = $model->getProgrammeEnd();
+		}
 
 		$this->title = 'Programmübersicht';
 
